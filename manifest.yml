@@ -1,0 +1,15 @@
+modules:
+  jira:projectPage:
+    - key: jira-estimate-hello-world-project-page
+      resource: main
+      resolver:
+        function: resolver
+      title: Jira-Estimate
+  function:
+    - key: resolver
+      handler: index.handler
+resources:
+  - key: main
+    path: static/hello-world/build
+app:
+  id: ari:cloud:ecosystem::app/f8f17574-87e4-41f7-88d8-944136ad610f
