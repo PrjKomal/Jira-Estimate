@@ -1,11 +1,15 @@
 import React from 'react'
+import styles from './styles.module.scss'
+import Filter from '../HOC/Filter/Filter'
 
 const HomePage = () => {
     return (
-        <>
-
-            <h1>HomePage</h1>
-        </>
+        <div className={styles.HomePage}>
+            <div className={styles.mainHeading}>Jira Estimate</div>
+            <div className={styles.mainContainer}>
+                <Filter />
+            </div>
+        </div>
     )
 }
 
