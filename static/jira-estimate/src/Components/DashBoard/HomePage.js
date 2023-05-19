@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './styles.module.scss'
-import Filter from '../HOC/Filter/Filter'
+import Filter from '../HOC/Filter/FIlter'
 
 const HomePage = () => {
     return (
