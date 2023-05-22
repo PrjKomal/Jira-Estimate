@@ -8,8 +8,7 @@
     "@forge/bridge": "2.5.6",
     "node-sass": "^7.0.3",
     "react": "^16.13.1",
-    "react-dnd": "^16.0.1",
-    "react-dnd-html5-backend": "^16.0.1",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^16.13.1",
     "react-model": "^4.3.1",
     "react-router-dom": "^6.11.2"

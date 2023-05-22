@@ -6,7 +6,6 @@ import styles from './styles.module.scss'
 const TableList = () => {
   return (
     <div className={styles.TableList}>
-        <TableHeading />
         <Table />
     </div>
   )
