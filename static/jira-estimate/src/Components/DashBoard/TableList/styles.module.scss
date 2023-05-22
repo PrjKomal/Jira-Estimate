@@ -23,3 +23,19 @@
         }
     }
 }
+
+.taskName{
+    color: #000000;
+    font-size: 14px;
+    font-weight: 500;
+}
+.taskDescription{
+    color: #000000;
+    font-size: 13px;
+}
+.taskDetails{
+    display: flex;
+    justify-content: space-between;
+    color: #6D6D6D;
+    margin-top: 48px;
+}

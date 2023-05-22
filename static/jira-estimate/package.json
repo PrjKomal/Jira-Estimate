@@ -5,6 +5,7 @@
   "homepage": ".",
   "dependencies": {
     "@atlaskit/css-reset": "^6.0.1",
+    "@fontsource/roboto": "^4.5.8",
     "@forge/bridge": "2.5.6",
     "node-sass": "^7.0.3",
     "react": "^16.13.1",

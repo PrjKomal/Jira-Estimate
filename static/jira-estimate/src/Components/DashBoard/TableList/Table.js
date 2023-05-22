@@ -4,11 +4,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 const itemsFromBackend = [
-  { id: uuidv4(), content: "First task" },
-  { id: uuidv4(), content: "Second task" },
-  { id: uuidv4(), content: "Third task" },
-  { id: uuidv4(), content: "Fourth task" },
-  { id: uuidv4(), content: "Fifth task" }
+  { id: uuidv4(), content: "First task", description: "This is description", key: "KAN-1", user: "Komal" },
+  { id: uuidv4(), content: "Second task", description: "This is description", key: "KAN-2", user: "Komal" },
+  { id: uuidv4(), content: "Third task", description: "This is description", key: "TEST-1", user: "Komal" },
+  { id: uuidv4(), content: "Fourth task", description: "This is description", key: "KAN-3", user: "Komal" },
+  { id: uuidv4(), content: "Fifth task", description: "This is description", key: "TEST-2", user: "Komal" }
 ];
 
 const columnsFromBackend = {
@@ -123,7 +123,7 @@ const Table = () => {
                                       padding: 16,
                                       margin: "0 0 8px 0",
                                       width: "189px",
-                                      height: "130px",
+                                      height: "110px",
                                       backgroundColor: "#FFFFFF",
                                       boxShadow: " 0px 2px 2px #00000029",
                                       borderRadius: "8px",
@@ -131,7 +131,13 @@ const Table = () => {
                                       ...provided.draggableProps.style
                                     }}
                                   >
-                                    {item.content}
+                                    <div className={styles.taskName}>{item.content}</div>
+                                    <div className={styles.taskDescription}>{item.description}</div>
+
+                                    <div className={styles.taskDetails}>
+                                      <div>{item.key}</div>
+                                      <div>{item.user}</div>
+                                    </div>
                                   </div>
                                 );
                               }}
