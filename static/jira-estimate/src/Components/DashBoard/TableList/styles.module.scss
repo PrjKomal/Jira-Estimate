@@ -24,18 +24,31 @@
     }
 }
 
-.taskName{
+.taskName {
     color: #000000;
     font-size: 14px;
     font-weight: 500;
 }
-.taskDescription{
+
+.taskDescription {
     color: #000000;
     font-size: 13px;
+    height: 59px;
+    overflow: hidden;
 }
-.taskDetails{
+
+.taskDetails {
     display: flex;
     justify-content: space-between;
     color: #6D6D6D;
-    margin-top: 48px;
+    margin-top: 10px;
+
+    .imgWithProjectKey {
+        display: flex;
+        justify-content: space-between;
+        .key{
+            margin-left: 5px;
+        }
+        
+    }
 }

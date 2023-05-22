@@ -4,11 +4,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 const itemsFromBackend = [
-  { id: uuidv4(), content: "First task", description: "This is description", key: "KAN-1", user: "Komal" },
-  { id: uuidv4(), content: "Second task", description: "This is description", key: "KAN-2", user: "Komal" },
-  { id: uuidv4(), content: "Third task", description: "This is description", key: "TEST-1", user: "Komal" },
-  { id: uuidv4(), content: "Fourth task", description: "This is description", key: "KAN-3", user: "Komal" },
-  { id: uuidv4(), content: "Fifth task", description: "This is description", key: "TEST-2", user: "Komal" }
+  { id: uuidv4(), content: "First task", description: "This is description", key: "KAN-1", user: "Komal", iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium" },
+  { id: uuidv4(), content: "Second task", description: "It is a long established fact that a reader will be distracted .", key: "KAN-2", user: "Komal", iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium" },
+  { id: uuidv4(), content: "Third task", description: "It is a long established fact that a reader will be distracted It is a long established fact that a reader will be distracted It is a long established fact that a reader will be distracted It is a long established fact that a reader will be distracted .", key: "TEST-1", user: "Komal", iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium" },
+  { id: uuidv4(), content: "Fourth task", description: "It is a long established fact that a reader will be distracted .", key: "KAN-3", user: "Komal", iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium" },
+  { id: uuidv4(), content: "Fifth task", description: "This is description", key: "TEST-2", user: "Komal", iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium" }
 ];
 
 const columnsFromBackend = {
@@ -135,7 +135,10 @@ const Table = () => {
                                     <div className={styles.taskDescription}>{item.description}</div>
 
                                     <div className={styles.taskDetails}>
-                                      <div>{item.key}</div>
+                                      <div className={styles.imgWithProjectKey}>
+                                        <img src="https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium" alt="url"/>
+                                        <div className={styles.key}>{item.key}</div>
+                                      </div>
                                       <div>{item.user}</div>
                                     </div>
                                   </div>
