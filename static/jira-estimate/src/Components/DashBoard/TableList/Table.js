@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import styles from './styles.module.scss'
 import { v4 as uuidv4 } from 'uuid';
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";  
+import ForgeUI, { Image } from '@forge/ui';
 
 const itemsFromBackend = [
   { id: uuidv4(), content: "First task", description: "This is description", key: "KAN-1", user: "Komal", iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium" },
@@ -136,7 +137,7 @@ const Table = () => {
 
                                     <div className={styles.taskDetails}>
                                       <div className={styles.imgWithProjectKey}>
-                                        <img src="https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium" alt="url"/>
+                                        <img src={item.iconUrl} alt="url"/>
                                         <div className={styles.key}>{item.key}</div>
                                       </div>
                                       <div>{item.user}</div>
