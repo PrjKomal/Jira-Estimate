@@ -1,0 +1,22 @@
+.filterContainer {
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    .filterHeading {
+        color: #42526e;
+        font-size: 14px;
+        width: 65px;
+        height: 21px;
+        margin-top: 5px;
+        letter-spacing: 0;
+    }
+
+    .filterBox {
+        width: 122px;
+        height: 35px;
+        background: #F5F6F8 0% 0% no-repeat padding-box;
+        border-radius: 2px;
+        opacity: 1;
+        text-align: center;
+    }
+}

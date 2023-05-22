@@ -1,15 +1,20 @@
 import React from 'react'
 import styles from './styles.module.scss'
 import Filter from '../HOC/Filter/FIlter'
-import TableList from './TableList/TableList'
+import Table from './TableList/Table'
 
 const HomePage = () => {
     return (
         <div className={styles.HomePage}>
-            <div className={styles.mainHeading}>Jira Estimate</div>
+            <div className={styles.mainHeading}>
+                <spna>
+                    Jira Estimates
+                </spna>
+                <span className={styles.anotherHeading}>Task Estimates</span>
+            </div>
             <div className={styles.mainContainer}>
                 <Filter />
-                <TableList />
+                <Table />
             </div>
         </div>
     )
