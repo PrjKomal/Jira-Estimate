@@ -1,15 +1,73 @@
 import React, { useState } from 'react'
 import styles from './styles.module.scss'
 import { v4 as uuidv4 } from 'uuid';
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";  
-import ForgeUI, { Image } from '@forge/ui';
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import Avatar from '@atlaskit/avatar';
 
 const itemsFromBackend = [
-  { id: uuidv4(), content: "First task", description: "This is description", key: "KAN-1", user: "Komal", iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium" },
-  { id: uuidv4(), content: "Second task", description: "It is a long established fact that a reader will be distracted .", key: "KAN-2", user: "Komal", iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium" },
-  { id: uuidv4(), content: "Third task", description: "It is a long established fact that a reader will be distracted It is a long established fact that a reader will be distracted It is a long established fact that a reader will be distracted It is a long established fact that a reader will be distracted .", key: "TEST-1", user: "Komal", iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium" },
-  { id: uuidv4(), content: "Fourth task", description: "It is a long established fact that a reader will be distracted .", key: "KAN-3", user: "Komal", iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium" },
-  { id: uuidv4(), content: "Fifth task", description: "This is description", key: "TEST-2", user: "Komal", iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium" }
+  {
+    id: uuidv4(),
+    content: "First task",
+    description: "This is description",
+    key: "KAN-1", user: "Komal",
+    iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+    assignee: {
+      avatarUrls: {
+        "24x24": "https://secure.gravatar.com/avatar/001b105e386299ed86f919f870c44cae?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FK-0.png"
+      }
+    }
+  },
+  {
+    id: uuidv4(),
+    content: "Second task",
+    description: "It is a long established fact that a reader will be distracted .",
+    key: "KAN-2", user: "Komal",
+    iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium",
+    assignee: {
+      avatarUrls: {
+        "24x24": "https://secure.gravatar.com/avatar/001b105e386299ed86f919f870c44cae?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FK-0.png"
+      }
+    }
+  },
+  {
+    id: uuidv4(),
+    content: "Third task",
+    description: "It is a long established fact that a reader will be distracted It is a long established fact that a reader will be distracted It is a long established fact that a reader will be distracted It is a long established fact that a reader will be distracted .",
+    key: "TEST-1",
+    user: "Komal",
+    iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+    assignee: {
+      avatarUrls: {
+        "24x24": "https://secure.gravatar.com/avatar/001b105e386299ed86f919f870c44cae?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FK-0.png"
+      }
+    }
+  },
+  {
+    id: uuidv4(),
+    content: "Fourth task",
+    description: "It is a long established fact that a reader will be distracted .",
+    key: "KAN-3",
+    user: "Komal",
+    iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium",
+    assignee: {
+      avatarUrls: {
+        "24x24": "https://secure.gravatar.com/avatar/001b105e386299ed86f919f870c44cae?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FK-0.png"
+      }
+    }
+  },
+  {
+    id: uuidv4(),
+    content: "Fifth task",
+    description: "This is description",
+    key: "TEST-2",
+    user: "Komal",
+    iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+    assignee: {
+      avatarUrls: {
+        "24x24": "https://secure.gravatar.com/avatar/001b105e386299ed86f919f870c44cae?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FK-0.png"
+      }
+    }
+  }
 ];
 
 const columnsFromBackend = {
@@ -137,10 +195,17 @@ const Table = () => {
 
                                     <div className={styles.taskDetails}>
                                       <div className={styles.imgWithProjectKey}>
-                                        <img src={item.iconUrl} alt="url"/>
+                                        <Avatar
+                                          size="xsmall"
+                                          appearance="square"
+                                          src={item.iconUrl}
+                                          name="Nucleus"
+                                        />
                                         <div className={styles.key}>{item.key}</div>
                                       </div>
-                                      <div>{item.user}</div>
+                                      <div>
+                                        <Avatar appearance="square" size="small" src={item.assignee.avatarUrls["24x24"]} name="url" />
+                                      </div>
                                     </div>
                                   </div>
                                 );

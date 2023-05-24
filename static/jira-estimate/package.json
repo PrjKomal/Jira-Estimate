@@ -4,6 +4,7 @@
   "private": true,
   "homepage": ".",
   "dependencies": {
+    "@atlaskit/avatar": "^21.3.2",
     "@atlaskit/css-reset": "^6.0.1",
     "@atlaskit/image": "^1.1.2",
     "@fontsource/roboto": "^4.5.8",

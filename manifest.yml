@@ -8,9 +8,9 @@ modules:
       layout: basic
       sections:
         - pages:
-            - title: Page 1
+            - title: Task Estimates
               route: /dashboard
-            - title: Page 2
+            - title: Worklog
               route: /another-page
   function:
     - key: resolver
@@ -34,3 +34,6 @@ permissions:
     images:
       - "https://i1.wp.com"
       - "*.atlassian.net"
+      - "*.gravatar.com"
+      - '*.wp.com'
+      - '*.atl-paas.net'
