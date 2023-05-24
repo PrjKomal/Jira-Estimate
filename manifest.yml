@@ -17,3 +17,11 @@ resources:
       port: 3000
 app:
   id: ari:cloud:ecosystem::app/f8f17574-87e4-41f7-88d8-944136ad610f
+permissions:
+  content:
+    styles:
+      - "unsafe-inline"
+  external:
+    images:
+      - "https://i1.wp.com"
+      - "*.atlassian.net"
