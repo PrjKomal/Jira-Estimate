@@ -38,8 +38,6 @@ const Filter = () => {
 
   return (
     <div className={styles.filterContainer}>
-
-      <div className={styles.filterHeading}>Group By</div>
       <div className={styles.filterBox}>
         <div className={showItems ? styles.select_box__box_active : styles.select_box__box}>
           <div className={styles.select_box__container}>
@@ -65,6 +63,8 @@ const Filter = () => {
           </div>
         </div>
       </div>
+
+      
 
     </div>
   )

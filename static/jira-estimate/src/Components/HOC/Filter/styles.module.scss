@@ -2,14 +2,6 @@
     width: 200px;
     display: flex;
     justify-content: space-between;
-    .filterHeading {
-        color: #42526e;
-        font-size: 14px;
-        width: 65px;
-        height: 21px;
-        margin-top: 5px;
-        letter-spacing: 0;
-    }
 
 }
 
@@ -48,15 +40,16 @@
 }
 
 .select_box__items {
-    background-color: #F5F6F8;
-    top: 36px;
-    width: inherit;
-    position: absolute;
-    z-index: 1;
+    background-color: #fff;
+    border-radius: 2px;
     left: -1px;
-    border-radius: 0px 0px 2px 2px;
     max-height: 300px;
     overflow: auto;
+    position: absolute;
+    top: 36px;
+    width: inherit;
+    z-index: 6;
+    box-shadow: 0px 2px 2px #00000029;
 }
 
 .select_box__items div {
@@ -102,7 +95,7 @@
 }
 
 .select_box__items div:hover {
-    background-color: #FFFFFF;
+    background-color: #F5F6F8;
 }
 
 .select_box__items div:last-child {
