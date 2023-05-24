@@ -3,6 +3,8 @@ modules:
     - key: jira-estimate-hello-world-project-page
       resource: main
       title: Jira Estimate
+      resolver:
+        function: resolver
       layout: basic
       sections:
         - pages:
@@ -10,6 +12,10 @@ modules:
               route: /dashboard
             - title: Page 2
               route: /another-page
+  function:
+    - key: resolver
+      handler: index.handler
+
 resources:
   - key: main
     path: static/jira-estimate/build
@@ -18,6 +24,9 @@ resources:
 app:
   id: ari:cloud:ecosystem::app/f8f17574-87e4-41f7-88d8-944136ad610f
 permissions:
+  scopes:
+    - read:jira-work
+    - write:jira-work
   content:
     styles:
       - "unsafe-inline"

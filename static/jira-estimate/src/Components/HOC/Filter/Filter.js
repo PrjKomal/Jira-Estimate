@@ -2,15 +2,27 @@ import React, { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 import dropdownDownpIcon from '../../../assests/images/Icon feather-chevron-down.svg'
 import dropdownUpIcon from '../../../assests/images/Icon feather-chevron-down.svg'
-
+import { invoke } from '@forge/bridge';
 const Filter = () => {
   const [showItems, setShowItem] = useState(false)
   const [selectedItem, setSelectedItem] = useState();
 
+  const [projectsList, setProjects] = useState([])
   const items = [
     { project_id: 1, project_name: "TEST" },
     { project_id: 2, project_name: "KAN" }
   ]
+
+  useEffect(() => {
+    (async () => {
+      // Can be done using resolvers
+      // TO get all projects 
+      const data = await invoke('getAllProjects');
+      setProjects(data)
+    
+    })();
+    return () => {};
+  }, []);
 
   const handelDropDown = () => {
     setShowItem(!showItems)
@@ -42,11 +54,11 @@ const Filter = () => {
               style={{ display: showItems ? "block" : "none", }}
               className={styles.select_box__items}
             >
-              {items?.map(item => (
+              {projectsList?.map(project => (
                 <div
-                  key={item.project_id}
-                  onClick={() => handleProject(item.project_name)}>
-                  {item?.project_name}
+                  key={project.id}
+                  onClick={() => handleProject(project.key)}>
+                  {project?.key}
                 </div>
               ))}
             </div>
