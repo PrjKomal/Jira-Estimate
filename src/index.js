@@ -24,5 +24,28 @@ resolver.define('getAllProjects', async  (req) => {
       }
 });
 
+
+resolver.define('getAllUsers', async  (req) => {
+  try {
+      const response = await api
+        .asApp()
+        .requestJira(
+          route`/rest/api/3/users`,
+          {
+            headers: {
+              Accept: 'application/json',
+            },
+          }
+        );
+  
+      const data = await response.json();
+      const filterData = data.filter(item => item.accountType === "atlassian" && item.active === true)
+  
+      return filterData;
+    } catch (error) {
+      console.log(error);
+    }
+});
+
 export const handler = resolver.getDefinitions();
 

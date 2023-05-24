@@ -9,7 +9,7 @@ const itemsFromBackend = [
     id: uuidv4(),
     content: "First task",
     description: "This is description",
-    key: "KAN-1", user: "Komal",
+    key: "KAN-1",
     iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
     assignee: {
       avatarUrls: {
@@ -21,11 +21,11 @@ const itemsFromBackend = [
     id: uuidv4(),
     content: "Second task",
     description: "It is a long established fact that a reader will be distracted .",
-    key: "KAN-2", user: "Komal",
+    key: "KAN-2",
     iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium",
     assignee: {
       avatarUrls: {
-        "24x24": "https://secure.gravatar.com/avatar/001b105e386299ed86f919f870c44cae?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FK-0.png"
+        "24x24": "https://secure.gravatar.com/avatar/f1e22dfa36aec9d6f92d229219ad4638?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKK-2.png"
       }
     }
   },
@@ -34,7 +34,6 @@ const itemsFromBackend = [
     content: "Third task",
     description: "It is a long established fact that a reader will be distracted It is a long established fact that a reader will be distracted It is a long established fact that a reader will be distracted It is a long established fact that a reader will be distracted .",
     key: "TEST-1",
-    user: "Komal",
     iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
     assignee: {
       avatarUrls: {
@@ -47,11 +46,10 @@ const itemsFromBackend = [
     content: "Fourth task",
     description: "It is a long established fact that a reader will be distracted .",
     key: "KAN-3",
-    user: "Komal",
     iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium",
     assignee: {
       avatarUrls: {
-        "24x24": "https://secure.gravatar.com/avatar/001b105e386299ed86f919f870c44cae?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FK-0.png"
+        "24x24": "https://secure.gravatar.com/avatar/f1e22dfa36aec9d6f92d229219ad4638?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKK-2.png"
       }
     }
   },
@@ -60,7 +58,6 @@ const itemsFromBackend = [
     content: "Fifth task",
     description: "This is description",
     key: "TEST-2",
-    user: "Komal",
     iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
     assignee: {
       avatarUrls: {
