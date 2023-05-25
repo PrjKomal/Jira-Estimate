@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import Filter from '../HOC/Filter/FIlter'
 import Table from './TableList/Table'
 
-const HomePage = () => {
+const TaskEstimate = () => {
     return (
         <div className={styles.HomePage}>
             <div className={styles.mainHeading}>
@@ -20,4 +20,4 @@ const HomePage = () => {
     )
 }
 
-export default HomePage
+export default TaskEstimate

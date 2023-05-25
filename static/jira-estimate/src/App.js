@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
 import { view } from "@forge/bridge";
-import HomePage from "./Components/DashBoard/HomePage";
-import ResourcesPage from "./Components/AnotherPage/ResourcesPage";
+import HomePage from "./pages/HomePage";
+import Worklog from "./pages/Worklog";
 
 
 function App() {
@@ -45,8 +45,8 @@ function App() {
                     location={historyState.location}
                 >
                     <Routes>
-                        <Route path="/dashboard" element={<HomePage />}></Route>
-                        <Route path="/another-page" element={<ResourcesPage />}></Route>
+                        <Route path="/task-estimate" element={<HomePage />}></Route>
+                        <Route path="/worklog" element={<Worklog />}></Route>
                     </Routes>
                 </Router>
             ) : (

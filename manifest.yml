@@ -9,9 +9,9 @@ modules:
       sections:
         - pages:
             - title: Task Estimates
-              route: /dashboard
+              route: /task-estimate
             - title: Worklog
-              route: /another-page
+              route: /worklog
   function:
     - key: resolver
       handler: index.handler
