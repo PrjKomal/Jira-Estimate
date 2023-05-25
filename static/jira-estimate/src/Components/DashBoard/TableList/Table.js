@@ -34,55 +34,65 @@ const Table = () => {
     [uuidv4()]: {
       name: "Monday",
       items: allIssues.filter(item => {
-        const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-        const date = new Date(item.startDate)
-        const day = weekday[date.getDay()]
-        if (day === "Monday") {
-          return item;
+        if (item.startDate != null) {
+          const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+          const date = new Date(item.startDate)
+          const day = weekday[date.getDay()]
+          if (day === "Monday") {
+            return item;
+          }
         }
       })
     },
     [uuidv4()]: {
       name: "Tuesday",
       items: allIssues.filter(item => {
-        const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-        const date = new Date(item.startDate)
-        const day = weekday[date.getDay()]
-        if (day === "Tuesday") {
-          return item;
+        if (item.startDate != null) {
+          const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+          const date = new Date(item.startDate)
+          const day = weekday[date.getDay()]
+          if (day === "Tuesday") {
+            return item;
+          }
         }
       })
     },
     [uuidv4()]: {
       name: "Wednesday",
       items: allIssues.filter(item => {
-        const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-        const date = new Date(item.startDate)
-        const day = weekday[date.getDay()]
-        if (day === "Wednesday") {
-          return item;
+        if (item.startDate != null) {
+          const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+          const date = new Date(item.startDate)
+          const day = weekday[date.getDay()]
+          if (day === "Wednesday") {
+            return item;
+          }
         }
       })
     },
     [uuidv4()]: {
       name: "Thursday",
       items: allIssues.filter(item => {
-        const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-        const date = new Date(item.startDate)
-        const day = weekday[date.getDay()]
-        if (day === "Thursday") {
-          return item;
+        if (item.startDate != null) {
+          const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+          const date = new Date(item.startDate)
+          const day = weekday[date.getDay()]
+          if (day === "Thursday") {
+            return item;
+          }
         }
       })
     },
     [uuidv4()]: {
       name: "Friday",
       items: allIssues.filter(item => {
-        const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-        const date = new Date(item.startDate)
-        const day = weekday[date.getDay()]
-        if (day === "Friday") {
-          return item;
+        if (item.startDate != null) {
+          const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+          const date = new Date(item.startDate)
+          const day = weekday[date.getDay()]
+          if (day === "Friday") {
+            return item;
+          }
         }
       })
     }
@@ -91,7 +101,7 @@ const Table = () => {
   useEffect(() => {
     setColumns(columnsFromBackend)
   }, [allIssues])
-
+  console.log("columns", columns)
 
   const onDragEnd = (result, columns, setColumns) => {
     if (!result.destination) return;
