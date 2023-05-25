@@ -10,6 +10,7 @@ modules:
         - pages:
             - title: Task Estimates
               route: /task-estimate
+              icon: https://developer.atlassian.com/platform/forge/images/icons/issue-panel-icon.svg
             - title: Worklog
               route: /worklog
   function:
