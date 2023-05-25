@@ -1,102 +1,98 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 import { v4 as uuidv4 } from 'uuid';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import Avatar from '@atlaskit/avatar';
+import { invoke } from '@forge/bridge';
 
-const itemsFromBackend = [
-  {
-    id: uuidv4(),
-    content: "First task",
-    description: "This is description",
-    key: "KAN-1",
-    iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
-    assignee: {
-      avatarUrls: {
-        "24x24": "https://secure.gravatar.com/avatar/001b105e386299ed86f919f870c44cae?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FK-0.png"
-      }
-    }
-  },
-  {
-    id: uuidv4(),
-    content: "Second task",
-    description: "It is a long established fact that a reader will be distracted .",
-    key: "KAN-2",
-    iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium",
-    assignee: {
-      avatarUrls: {
-        "24x24": "https://secure.gravatar.com/avatar/f1e22dfa36aec9d6f92d229219ad4638?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKK-2.png"
-      }
-    }
-  },
-  {
-    id: uuidv4(),
-    content: "Third task",
-    description: "It is a long established fact that a reader will be distracted It is a long established fact that a reader will be distracted It is a long established fact that a reader will be distracted It is a long established fact that a reader will be distracted .",
-    key: "TEST-1",
-    iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
-    assignee: {
-      avatarUrls: {
-        "24x24": "https://secure.gravatar.com/avatar/001b105e386299ed86f919f870c44cae?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FK-0.png"
-      }
-    }
-  },
-  {
-    id: uuidv4(),
-    content: "Fourth task",
-    description: "It is a long established fact that a reader will be distracted .",
-    key: "KAN-3",
-    iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium",
-    assignee: {
-      avatarUrls: {
-        "24x24": "https://secure.gravatar.com/avatar/f1e22dfa36aec9d6f92d229219ad4638?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FKK-2.png"
-      }
-    }
-  },
-  {
-    id: uuidv4(),
-    content: "Fifth task",
-    description: "This is description",
-    key: "TEST-2",
-    iconUrl: "https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
-    assignee: {
-      avatarUrls: {
-        "24x24": "https://secure.gravatar.com/avatar/001b105e386299ed86f919f870c44cae?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FK-0.png"
-      }
-    }
-  }
-];
-
-const columnsFromBackend = {
-  [uuidv4()]: {
-    name: "Estimates",
-    items: itemsFromBackend
-  },
-  [uuidv4()]: {
-    name: "Monday",
-    items: []
-  },
-  [uuidv4()]: {
-    name: "Tuesday",
-    items: []
-  },
-  [uuidv4()]: {
-    name: "Wednesday",
-    items: []
-  },
-  [uuidv4()]: {
-    name: "Thursday",
-    items: []
-  },
-  [uuidv4()]: {
-    name: "Friday",
-    items: []
-  }
-};
 
 
 const Table = () => {
-  const [columns, setColumns] = useState(columnsFromBackend);
+
+  const [columns, setColumns] = useState([]);
+  const [allIssues, setAllIssues] = useState([])
+  useEffect(() => {
+    (async () => {
+      // Can be done using resolvers
+      // TO get all issues 
+      const data = await invoke('getAllIssues');
+      console.log("get all issues", data)
+      if (data.length > 0) {
+        setAllIssues(data)
+      }
+    })();
+  }, []);
+  const columnsFromBackend = {
+    [uuidv4()]: {
+      name: "Estimates",
+      items: allIssues.filter(item => {
+        if (item.startDate === null) {
+          return item;
+        }
+      })
+    },
+    [uuidv4()]: {
+      name: "Monday",
+      items: allIssues.filter(item => {
+        const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+        const date = new Date(item.startDate)
+        const day = weekday[date.getDay()]
+        if (day === "Monday") {
+          return item;
+        }
+      })
+    },
+    [uuidv4()]: {
+      name: "Tuesday",
+      items: allIssues.filter(item => {
+        const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+        const date = new Date(item.startDate)
+        const day = weekday[date.getDay()]
+        if (day === "Tuesday") {
+          return item;
+        }
+      })
+    },
+    [uuidv4()]: {
+      name: "Wednesday",
+      items: allIssues.filter(item => {
+        const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+        const date = new Date(item.startDate)
+        const day = weekday[date.getDay()]
+        if (day === "Wednesday") {
+          return item;
+        }
+      })
+    },
+    [uuidv4()]: {
+      name: "Thursday",
+      items: allIssues.filter(item => {
+        const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+        const date = new Date(item.startDate)
+        const day = weekday[date.getDay()]
+        if (day === "Thursday") {
+          return item;
+        }
+      })
+    },
+    [uuidv4()]: {
+      name: "Friday",
+      items: allIssues.filter(item => {
+        const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+        const date = new Date(item.startDate)
+        const day = weekday[date.getDay()]
+        if (day === "Friday") {
+          return item;
+        }
+      })
+    }
+  };
+
+  useEffect(() => {
+    setColumns(columnsFromBackend)
+  }, [allIssues])
+
+
   const onDragEnd = (result, columns, setColumns) => {
     if (!result.destination) return;
     const { source, destination } = result;
@@ -187,7 +183,7 @@ const Table = () => {
                                       ...provided.draggableProps.style
                                     }}
                                   >
-                                    <div className={styles.taskName}>{item.content}</div>
+                                    <div className={styles.taskName}>{item.summary}</div>
                                     <div className={styles.taskDescription}>{item.description}</div>
 
                                     <div className={styles.taskDetails}>
@@ -201,7 +197,7 @@ const Table = () => {
                                         <div className={styles.key}>{item.key}</div>
                                       </div>
                                       <div>
-                                        <Avatar appearance="square" size="small" src={item.assignee.avatarUrls["24x24"]} name="url" />
+                                        {item.assignee.length === 0 ? <></> : <Avatar appearance="square" size="small" src={item.assignee} name="url" />}
                                       </div>
                                     </div>
                                   </div>
