@@ -73,7 +73,7 @@ const Filter = () => {
         </div>
       </div>
       <div>
-        <AvatarGroup appearance="stack" data={userFilteredData} />
+        <AvatarGroup appearance="stack" data={userFilteredData} maxCount={3}/>
       </div>
 
     </div>
