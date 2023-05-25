@@ -4,7 +4,7 @@ import dropdownDownpIcon from '../../../assests/images/Icon feather-chevron-down
 import dropdownUpIcon from '../../../assests/images/Icon feather-chevron-down.svg'
 import { useOnOutsideClick } from '../useOnOutsideClick'
 import { invoke } from '@forge/bridge';
-import Avatar from '@atlaskit/avatar';
+import AvatarGroup from '@atlaskit/avatar-group';
 
 
 const Filter = () => {
@@ -26,6 +26,12 @@ const Filter = () => {
     })();
     return () => { };
   }, []);
+
+  const userFilteredData = userData.map((data) => ({
+    name: data.displayName,
+    href: '#',
+    src: data.avatarUrls["24x24"],
+  }));
 
   const handelDropDown = () => {
     setShowItem(!showItems)
@@ -67,16 +73,7 @@ const Filter = () => {
         </div>
       </div>
       <div>
-        {userData.map((user) => {
-          return (
-            <Avatar
-              size="small"
-              appearance="square"
-              src={user.avatarUrls["24x24"]}
-              name="user"
-            />
-          )
-        })}
+        <AvatarGroup appearance="stack" data={userFilteredData} />
       </div>
 
     </div>
