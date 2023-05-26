@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './styles.module.scss'
 import Filter from '../HOC/Filter/FIlter'
 import Table from './TableList/Table'
 
 const TaskEstimate = () => {
+    const [project, setProject] = useState("")
+    console.log("project", project)
     return (
         <div className={styles.HomePage}>
             <div className={styles.mainHeading}>
@@ -13,8 +15,8 @@ const TaskEstimate = () => {
                 <span className={styles.anotherHeading}>Task Estimates</span>
             </div>
             <div className={styles.mainContainer}>
-                <Filter />
-                <Table />
+                <Filter setProject={setProject}/>
+                <Table project={project}/>
             </div>
         </div>
     )

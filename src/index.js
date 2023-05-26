@@ -49,31 +49,63 @@ resolver.define('getAllUsers', async (req) => {
 
 resolver.define('getAllIssues', async (req) => {
   try {
-    const response = await api
-      .asApp()
-      .requestJira(
-        route`/rest/api/3/search`,
-        {
-          headers: {
-            Accept: 'application/json',
-          },
+    console.log("req", req)
+    const project_name = req.payload.project_name
+    if (!project_name) {
+      const response = await api
+
+        .asApp()
+        .requestJira(
+          route`/rest/api/3/search`,
+          {
+            headers: {
+              Accept: 'application/json',
+            },
+          }
+        );
+      const data = await response.json();
+
+      const issuesData = data.issues.map(item => {
+        return {
+          id: item.id,
+          key: item.key,
+          summary: item.fields.summary,
+          iconUrl: item.fields.issuetype.iconUrl,
+          description: item.fields.description != null ? item.fields.description.content.length > 0 ? item.fields.description.content[0].content[0].text : "" : "",
+          assignee: item.fields.assignee == null ? "" : item.fields.assignee.avatarUrls["24x24"],
+          startDate: item.fields.customfield_10015
         }
-      );
-    const data = await response.json();
+      })
 
-    const issuesData = data.issues.map(item => {
-      return {
-        id: item.id,
-        key: item.key,
-        summary: item.fields.summary,
-        iconUrl: item.fields.issuetype.iconUrl,
-        description: item.fields.description != null ? item.fields.description.content.length > 0 ? item.fields.description.content[0].content[0].text : "" : "",
-        assignee: item.fields.assignee == null ? "" : item.fields.assignee.avatarUrls["24x24"],
-        startDate: item.fields.customfield_10015
-      }
-    })
+      return issuesData;
+    }else{
+      const response = await api
 
-    return issuesData;
+        .asApp()
+        .requestJira(
+          route`/rest/api/3/search?jql=project=${project_name}`,
+          {
+            headers: {
+              Accept: 'application/json',
+            },
+          }
+        );
+      const data = await response.json();
+
+      const issuesData = data.issues.map(item => {
+        return {
+          id: item.id,
+          key: item.key,
+          summary: item.fields.summary,
+          iconUrl: item.fields.issuetype.iconUrl,
+          description: item.fields.description != null ? item.fields.description.content.length > 0 ? item.fields.description.content[0].content[0].text : "" : "",
+          assignee: item.fields.assignee == null ? "" : item.fields.assignee.avatarUrls["24x24"],
+          startDate: item.fields.customfield_10015
+        }
+      })
+
+      return issuesData;
+    }
   } catch (error) {
     console.log(error);
   }

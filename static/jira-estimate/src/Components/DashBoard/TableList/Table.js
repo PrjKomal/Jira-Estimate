@@ -7,7 +7,8 @@ import { invoke } from '@forge/bridge';
 
 
 
-const Table = () => {
+const Table = (props) => {
+  const { project } = props
 
   const [columns, setColumns] = useState([]);
   const [allIssues, setAllIssues] = useState([])
@@ -15,13 +16,11 @@ const Table = () => {
     (async () => {
       // Can be done using resolvers
       // TO get all issues 
-      const data = await invoke('getAllIssues');
+      const data = await invoke('getAllIssues', { project_name: project });
       console.log("get all issues", data)
-      if (data.length > 0) {
-        setAllIssues(data)
-      }
+      setAllIssues(data)
     })();
-  }, []);
+  }, [project]);
   const columnsFromBackend = {
     [uuidv4()]: {
       name: "Estimates",

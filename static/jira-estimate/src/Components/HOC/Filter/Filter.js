@@ -7,7 +7,8 @@ import { invoke } from '@forge/bridge';
 import AvatarGroup from '@atlaskit/avatar-group';
 
 
-const Filter = () => {
+const Filter = (props) => {
+  const { setProject} = props
   const [showItems, setShowItem] = useState(false)
   const [selectedItem, setSelectedItem] = useState();
 
@@ -38,6 +39,7 @@ const Filter = () => {
   }
   const handleProject = (project_name) => {
     setSelectedItem(project_name)
+    setProject(project_name)
     setShowItem(false)
   }
 
