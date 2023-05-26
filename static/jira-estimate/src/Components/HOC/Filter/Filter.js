@@ -8,7 +8,7 @@ import AvatarGroup from '@atlaskit/avatar-group';
 
 
 const Filter = (props) => {
-  const { setProject} = props
+  const { setProject } = props
   const [showItems, setShowItem] = useState(false)
   const [selectedItem, setSelectedItem] = useState();
 
@@ -28,11 +28,7 @@ const Filter = (props) => {
     return () => { };
   }, []);
 
-  const userFilteredData = userData.map((data) => ({
-    name: data.displayName,
-    href: '#',
-    src: data.avatarUrls["24x24"],
-  }));
+  
 
   const handelDropDown = () => {
     setShowItem(!showItems)
@@ -48,6 +44,12 @@ const Filter = (props) => {
     if (showItems) setShowItem(false);
   });
 
+  const topCount = 4
+  const bottomCount = userData.length - topCount;
+  const [isOpen, setIsOpen] = useState(false)
+  const handleMoreUser = () => {
+    setIsOpen(!isOpen)
+  }
 
   return (
     <div className={styles.filterContainer}>
@@ -75,7 +77,42 @@ const Filter = (props) => {
         </div>
       </div>
       <div>
-        <AvatarGroup appearance="stack" data={userFilteredData} maxCount={2}/>
+        <div className={styles.userContainer}>
+          {userData.map((item, index) => {
+            if (index < topCount) {
+              return (
+                <div key={item.accountId} className={styles.userBox} >
+                  <div className={styles.userdetails}>
+                    <img src={item.avatarUrls['24x24']} className={styles.userImage} />
+                  </div>
+                </div>
+              )
+            } else if (index == 5) {
+              return (
+                <div key={item.accountId} className={styles.userBox} >
+                  <div className={styles.userdetails2} onClick={handleMoreUser}>
+                    <span>+{bottomCount}</span>
+                  </div>
+                </div>
+              )
+            }
+          })}
+        </div>
+        {isOpen && <div className={styles.userBox2}>
+          <div className={styles.user}>
+            {userData.map((item, index) => {
+              if (topCount < index) {
+                return (
+                  <div className={styles.user2}>
+                    <input type='checkbox' />
+                    <img src={item.avatarUrls['24x24']} />
+                    <span>{item.displayName}</span>
+                  </div>
+                )
+              }
+            })}
+          </div>
+        </div>}
       </div>
 
     </div>

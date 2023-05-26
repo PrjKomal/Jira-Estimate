@@ -101,3 +101,107 @@
 .select_box__items div:last-child {
     border-bottom: 2px solid transparent;
 }
+
+
+.userContainer {
+    display: flex;
+
+    .userBox {
+        display: inline-block;
+        position: relative;
+        outline: 0px;
+
+        .userdetails {
+            height: 32px;
+            width: 32px;
+            -webkit-box-align: stretch;
+            align-items: stretch;
+            background-color: #FFFFFF;
+            border-radius: 50%;
+            box-sizing: content-box;
+            cursor: inherit;
+            display: flex;
+            flex-direction: column;
+            -webkit-box-pack: center;
+            justify-content: center;
+            outline: none;
+            overflow: hidden;
+            position: static;
+            transform: translateZ(0px);
+            transition: transform 200ms ease 0s, opacity 200ms ease 0s;
+            box-shadow: 0 0 0 2px #FFFFFF;
+            border: none;
+            padding: 0px;
+            font-size: inherit;
+            font-family: inherit;
+
+            .userImage {
+                border-radius: 50%;
+
+            }
+        }
+    }
+}
+
+.userdetails2 {
+    height: 32px;
+    width: 32px;
+    -webkit-box-align: stretch;
+    align-items: stretch;
+    background-color: #E5E5E5;
+    border-radius: 50%;
+    box-sizing: content-box;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    outline: none;
+    overflow: hidden;
+    position: static;
+    transform: translateZ(0px);
+    transition: transform 200ms ease 0s, opacity 200ms ease 0s;
+    box-shadow: 0 0 0 2px #FFFFFF;
+    border: none;
+    padding: 0px;
+    font-size: inherit;
+    font-family: inherit;
+    text-align: center;
+
+    span {
+        width: 31px;
+        margin-top: -2px;
+    }
+}
+
+.userBox2 {
+    width: 200px;
+    height: 200px;
+    display: block;
+    box-sizing: border-box;
+    z-index: 400;
+    background-color: #FFFFFF;
+    border-radius: 3px;
+    box-shadow: 0 4px 8px -2px rgba(9, 30, 66, 0.25), 0 0 1px rgba(9, 30, 66, 0.31);
+    overflow: auto;
+    margin-left: 72px;
+    margin-top: 10px;
+
+    .user {
+        padding: 10px 15px;
+    }
+
+    .user2 {
+        display: flex;
+
+        img {
+            height: 24px;
+            width: 24px;
+            margin-left: 10px;
+        }
+
+        span {
+            margin-left: 10px;
+        }
+    }
+}
