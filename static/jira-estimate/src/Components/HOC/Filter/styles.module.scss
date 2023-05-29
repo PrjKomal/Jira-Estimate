@@ -1,5 +1,5 @@
 .filterContainer {
-    width: 300px;
+    width: 350px;
     display: flex;
     justify-content: space-between;
 
@@ -102,7 +102,6 @@
     border-bottom: 2px solid transparent;
 }
 
-
 .userContainer {
     display: flex;
 
@@ -112,8 +111,6 @@
         outline: 0px;
 
         .userdetails {
-            height: 32px;
-            width: 32px;
             -webkit-box-align: stretch;
             align-items: stretch;
             background-color: #FFFFFF;
@@ -131,12 +128,14 @@
             transition: transform 200ms ease 0s, opacity 200ms ease 0s;
             box-shadow: 0 0 0 2px #FFFFFF;
             border: none;
-            padding: 0px;
+            padding: 2px;
             font-size: inherit;
             font-family: inherit;
 
             .userImage {
                 border-radius: 50%;
+                height: 32px;
+                width: 32px;
 
             }
         }
@@ -163,7 +162,7 @@
     transition: transform 200ms ease 0s, opacity 200ms ease 0s;
     box-shadow: 0 0 0 2px #FFFFFF;
     border: none;
-    padding: 0px;
+    padding: 2px;
     font-size: inherit;
     font-family: inherit;
     text-align: center;
@@ -175,7 +174,7 @@
 }
 
 .userBox2 {
-    width: 200px;
+    width: fit-content;
     height: 200px;
     display: block;
     box-sizing: border-box;
@@ -188,11 +187,14 @@
     margin-top: 10px;
 
     .user {
-        padding: 10px 15px;
+        padding: 15px 0px;
     }
 
     .user2 {
         display: flex;
+        margin-bottom: 10px;
+        padding: 10px;
+        cursor: pointer;
 
         img {
             height: 24px;
@@ -205,3 +207,38 @@
         }
     }
 }
+
+.user2:hover {
+    background-color: #E5E5E5;
+}
+
+.userdetailsActive {
+    -webkit-box-align: stretch;
+    align-items: stretch;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    box-sizing: content-box;
+    cursor: inherit;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    outline: none;
+    overflow: hidden;
+    position: static;
+    transform: translateZ(0px);
+    transition: transform 200ms ease 0s, opacity 200ms ease 0s;
+    box-shadow: 0 0 0 2px #FFFFFF;
+    border: 1px solid blue;
+    padding: 3px;
+    margin-right: 2px;
+    font-size: inherit;
+    font-family: inherit;
+      .userImage {
+                border-radius: 50%;
+                height: 32px;
+                width: 32px;
+
+            }
+}
+

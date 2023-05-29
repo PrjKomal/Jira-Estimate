@@ -8,7 +8,7 @@ import { invoke } from '@forge/bridge';
 
 
 const Table = (props) => {
-  const { project } = props
+  const { project, selectedUser, count } = props
 
   const [columns, setColumns] = useState([]);
   const [allIssues, setAllIssues] = useState([])
@@ -16,11 +16,24 @@ const Table = (props) => {
     (async () => {
       // Can be done using resolvers
       // TO get all issues 
-      const data = await invoke('getAllIssues', { project_name: project });
-      console.log("get all issues", data)
-      setAllIssues(data)
+      if (selectedUser.length == 0) {
+        const data = await invoke('getAllIssues', { project_name: project });
+        console.log("get all issues", data)
+        setAllIssues(data)
+      } else {
+        const data = await invoke('getAllIssues', { project_name: project });
+        const filteredData = data.filter(item => {
+          if (selectedUser.length == 0) {
+            return item;
+          } else {
+            return selectedUser.includes(item.assigneeId);
+          }
+        })
+        setAllIssues(filteredData)
+      }
     })();
-  }, [project]);
+  }, [project, selectedUser]);
+
   const columnsFromBackend = {
     [uuidv4()]: {
       name: "Estimates",
@@ -100,7 +113,6 @@ const Table = (props) => {
   useEffect(() => {
     setColumns(columnsFromBackend)
   }, [allIssues])
-  console.log("columns", columns)
 
   const onDragEnd = (result, columns, setColumns) => {
     if (!result.destination) return;
