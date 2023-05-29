@@ -3,6 +3,7 @@ modules:
     - key: jira-estimate-hello-world-project-page
       resource: main
       title: Jira Estimate
+      icon: https://jira-timesheets-cloud.herokuapp.com/addon-icon-outline.svg
       resolver:
         function: resolver
       layout: basic
