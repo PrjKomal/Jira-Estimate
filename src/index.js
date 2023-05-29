@@ -75,7 +75,12 @@ resolver.define('getAllIssues', async (req) => {
           assignee: item.fields.assignee == null ? "" : item.fields.assignee.avatarUrls["24x24"],
           assigneeId: item.fields.assignee == null  ? "":item.fields.assignee.accountId ,
           startDate: item.fields.customfield_10015,
-          duedate: item.fields.dueDate
+          duedate: item.fields.dueDate,
+          project: {
+            porject_id:item.fields.project.id,
+            porject_key:item.fields.project.key,
+              },
+           priorityUrl: item.fields.priority.iconUrl,
         }
       })
 
@@ -104,7 +109,12 @@ resolver.define('getAllIssues', async (req) => {
           assignee: item.fields.assignee == null ? "" : item.fields.assignee.avatarUrls["24x24"],
           assigneeId: item.fields.assignee == null  ? "":item.fields.assignee.accountId ,
           startDate: item.fields.customfield_10015,
-          duedate: item.fields.dueDate
+          duedate: item.fields.dueDate,
+          project: {
+            project_id:item.fields.project.id,
+            project_key:item.fields.project.key,
+              },
+           priorityUrl: item.fields.priority.iconUrl,
         }
       })
 
