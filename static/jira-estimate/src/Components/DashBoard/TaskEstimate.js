@@ -22,12 +22,17 @@ const TaskEstimate = () => {
         })();
     }, []);
 
-    useEffect(()=>{
-        const projectList = data.map(item=> item.project)
-        console.log("projectList", projectList)
-        setProjectList(projectList)
+    useEffect(() => {
+        const projectList = data.map(item => item.project)
 
-    },[data])
+        const uniqueProjectList = [...new Map(projectList.map(item =>
+            [item["project_id"], item])).values()];
+
+
+        console.log("projectList", uniqueProjectList)
+        setProjectList(uniqueProjectList)
+
+    }, [data])
 
 
     return (
