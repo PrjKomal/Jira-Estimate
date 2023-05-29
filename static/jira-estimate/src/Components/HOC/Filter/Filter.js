@@ -100,7 +100,7 @@ const Filter = (props) => {
           </div>
         </div>
       </div>
-      <div >
+      <div className={styles.userMain}>
         <div className={styles.userContainer}>
           {userData.map((item, index) => {
             if (index < topCount) {

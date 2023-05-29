@@ -1,5 +1,5 @@
 .filterContainer {
-    width: 350px;
+    width: 520px;
     display: flex;
     justify-content: space-between;
 
@@ -58,7 +58,6 @@
     padding-left: 10px;
     padding-top: 6px;
     font-size: 16px;
-    border-bottom: 1px solid #edebeb
 }
 
 .select_box__arrow {
@@ -242,3 +241,6 @@
             }
 }
 
+.userMain{
+    width: 250px;
+}
