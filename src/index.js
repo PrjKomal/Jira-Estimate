@@ -74,7 +74,8 @@ resolver.define('getAllIssues', async (req) => {
           description: item.fields.description != null ? item.fields.description.content.length > 0 ? item.fields.description.content[0].content[0].text : "" : "",
           assignee: item.fields.assignee == null ? "" : item.fields.assignee.avatarUrls["24x24"],
           assigneeId: item.fields.assignee == null  ? "":item.fields.assignee.accountId ,
-          startDate: item.fields.customfield_10015
+          startDate: item.fields.customfield_10015,
+          duedate: item.fields.dueDate
         }
       })
 
@@ -102,7 +103,8 @@ resolver.define('getAllIssues', async (req) => {
           description: item.fields.description != null ? item.fields.description.content.length > 0 ? item.fields.description.content[0].content[0].text : "" : "",
           assignee: item.fields.assignee == null ? "" : item.fields.assignee.avatarUrls["24x24"],
           assigneeId: item.fields.assignee == null  ? "":item.fields.assignee.accountId ,
-          startDate: item.fields.customfield_10015
+          startDate: item.fields.customfield_10015,
+          duedate: item.fields.dueDate
         }
       })
 
