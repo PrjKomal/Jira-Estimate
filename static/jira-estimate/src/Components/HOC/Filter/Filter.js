@@ -5,6 +5,7 @@ import dropdownUpIcon from '../../../assests/images/Icon feather-chevron-down.sv
 import { useOnOutsideClick } from '../useOnOutsideClick'
 import { invoke } from '@forge/bridge';
 import AvatarGroup from '@atlaskit/avatar-group';
+import Tooltip from '@atlaskit/tooltip';
 
 
 const Filter = (props) => {
@@ -36,7 +37,7 @@ const Filter = (props) => {
   const handleProject = (project_name) => {
     setSelectedItem(project_name)
     setProject(project_name)
-    setCount(count+1)
+    setCount(count + 1)
     setShowItem(false)
 
   }
@@ -67,7 +68,7 @@ const Filter = (props) => {
   const handleSelect = (e, id) => {
     if (selectedUser.includes(id)) {
       setSelectedUser(selectedUser.filter(e => e != id))
-    }else{
+    } else {
       setSelectedUser([...selectedUser, id])
     }
   }
@@ -105,9 +106,13 @@ const Filter = (props) => {
             if (index < topCount) {
               return (
                 <div key={item.accountId} className={styles.userBox} onClick={(e) => handleSelect(e, item.accountId)}>
-                  <div className={selectedUser.includes(item.accountId) ? styles.userdetailsActive : styles.userdetails}>
-                    <img src={item.avatarUrls['24x24']} className={styles.userImage} />
-                  </div>
+                  <Tooltip content={item.displayName}>
+                    {(tooltipProps) => (
+                      <div className={selectedUser.includes(item.accountId) ? styles.userdetailsActive : styles.userdetails} {...tooltipProps}>
+                        <img src={item.avatarUrls['24x24']} className={styles.userImage} />
+                      </div>
+                    )}
+                  </Tooltip>
                 </div>
               )
             } else if (index == 5) {

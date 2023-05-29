@@ -8,6 +8,7 @@
     "@atlaskit/avatar-group": "^9.3.2",
     "@atlaskit/css-reset": "^6.0.1",
     "@atlaskit/image": "^1.1.2",
+    "@atlaskit/tooltip": "^17.8.2",
     "@fontsource/roboto": "^4.5.8",
     "@forge/bridge": "2.5.6",
     "@forge/ui": "^1.9.0",
