@@ -220,7 +220,7 @@ const handleBlur = (e, id)=>{
                                         </div>}
 
                                         <img src={item.priorityUrl} name="priority url" />
-                                        <img src={item.assignee.assigneeUrl} name="user url" />
+                                        {Object.keys(item.assignee).length === 0 ? <></> : <img src={item.assignee.assigneeUrl} name="user url" />}
                                       </div>
 
                                     </div>
