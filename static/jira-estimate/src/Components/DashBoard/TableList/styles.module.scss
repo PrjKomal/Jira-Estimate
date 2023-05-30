@@ -46,9 +46,54 @@
     .imgWithProjectKey {
         display: flex;
         justify-content: space-between;
-        .key{
+
+        .key {
             margin-left: 5px;
         }
-        
+
     }
+}
+
+.userBox {
+    width: 87px;
+    display: flex;
+
+    img {
+        width: 24px;
+        height: 24px;
+    }
+}
+.userBoxActive{
+    width: 100px;
+    display: flex;
+
+    img {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.inputBox {
+    width: 50px;
+    height: 22px;
+    border: 2px solid blue;
+    font-size: 12px;
+    outline: none;
+
+}
+
+
+.estimateBox {
+
+    span {
+        font-size: 12px;
+    }
+}
+
+.orginalEstimate {
+    width: fit-content;
+    border-radius: 8px;
+    background-color: #F5F6F8;
+    text-align: center;
+    padding: 0px 7px;
 }

@@ -129,6 +129,25 @@ const Table = (props) => {
     }
   };
 
+  const [isInputOpen, setIsInputOpen] = useState("")
+  const handleInput = (e, id) => {
+    const ID = e.target.id
+    if(id == ID){
+      setIsInputOpen(id)
+    }
+  }
+
+  const [input, setInput] = useState("0m")
+  const handleInputChange = (e) => {
+    setInput(e.target.value)
+  }
+const handleBlur = (e, id)=>{
+  const ID = e.target.id
+    if(id == ID){
+      setIsInputOpen("")
+    }
+}
+
 
   return (
     <div className={styles.TableContainer}>
@@ -195,10 +214,15 @@ const Table = (props) => {
                                         />
                                         <div className={styles.key}>{item.key}</div>
                                       </div>
-                                      <div>
-                                        <Avatar appearance="square" size="small" src={item.priorityUrl} name="priority url" />
-                                        {Object.keys(item.assignee).length === 0 ? <></> : <Avatar appearance="square" size="small" src={item.assignee.assigneeUrl} name="user url" />}
+                                      <div className={isInputOpen === item.id ?  styles.userBoxActive:styles.userBox}>
+                                        {isInputOpen === item.id ? <input id={item.id} type="text" className={styles.inputBox} value={input} onChange={handleInputChange} onBlur={(e)=>handleBlur(e,item.id)} /> : <div id={item.id} className={styles.estimateBox} onClick={(e)=>handleInput(e,item.id)}>
+                                          <span id={item.id} className={styles.orginalEstimate}>{input}</span>
+                                        </div>}
+
+                                        <img src={item.priorityUrl} name="priority url" />
+                                        <img src={item.assignee.assigneeUrl} name="user url" />
                                       </div>
+
                                     </div>
                                   </div>
                                 );
