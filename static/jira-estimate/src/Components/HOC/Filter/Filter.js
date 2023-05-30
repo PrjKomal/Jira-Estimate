@@ -9,26 +9,22 @@ import Tooltip from '@atlaskit/tooltip';
 
 
 const Filter = (props) => {
-  const { setProject, selectedUser, setSelectedUser, count, setCount } = props
+  const { setProject, selectedUser, setSelectedUser, projectList, userList } = props
   const [showItems, setShowItem] = useState(false)
   const [selectedItem, setSelectedItem] = useState();
 
   const [projectsList, setProjects] = useState([])
-  const [userData, setUserData] = useState([])
 
   useEffect(() => {
     (async () => {
       // Can be done using resolvers
       // TO get all projects 
       const data = await invoke('getAllProjects');
-      const userData = await invoke('getAllUsers');
       setProjects(data)
-      setUserData(userData)
 
     })();
     return () => { };
   }, []);
-
 
 
   const handelDropDown = () => {
@@ -37,7 +33,6 @@ const Filter = (props) => {
   const handleProject = (project_name) => {
     setSelectedItem(project_name)
     setProject(project_name)
-    setCount(count + 1)
     setShowItem(false)
 
   }
@@ -48,7 +43,7 @@ const Filter = (props) => {
   });
 
   const topCount = 4
-  const bottomCount = userData.length - topCount;
+  const bottomCount = userList.length - topCount;
   const [isOpen, setIsOpen] = useState(false)
   const handleMoreUser = () => {
     setIsOpen(!isOpen)
@@ -102,14 +97,14 @@ const Filter = (props) => {
       </div>
       <div className={styles.userMain}>
         <div className={styles.userContainer}>
-          {userData.map((item, index) => {
+          {userList.map((item, index) => {
             if (index < topCount) {
               return (
                 <div key={item.accountId} className={styles.userBox} onClick={(e) => handleSelect(e, item.accountId)}>
                   <Tooltip content={item.displayName}>
                     {(tooltipProps) => (
                       <div className={selectedUser.includes(item.accountId) ? styles.userdetailsActive : styles.userdetails} {...tooltipProps}>
-                        <img src={item.avatarUrls['24x24']} className={styles.userImage} />
+                        <img src={item.assigneeUrl} className={styles.userImage} />
                       </div>
                     )}
                   </Tooltip>
@@ -128,7 +123,7 @@ const Filter = (props) => {
         </div>
         {isOpen && <div className={styles.userBox2}>
           <div className={styles.user}>
-            {userData.map((item, index) => {
+            {userList.map((item, index) => {
               if (topCount < index) {
                 return (
                   <label className={styles.user2} htmlFor={item.displayName} key={item.accountId}>

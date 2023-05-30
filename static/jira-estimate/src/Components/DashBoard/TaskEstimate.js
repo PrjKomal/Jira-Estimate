@@ -7,33 +7,50 @@ import { invoke } from '@forge/bridge'
 const TaskEstimate = () => {
     const [project, setProject] = useState("")
     const [selectedUser, setSelectedUser] = useState([])
-    const [count, setCount] = useState(0)
-    console.log("project", project)
-    const [data, setData] = useState([])
-    const [projectList, setProjectList] = useState()
+    const [userList, setUserList] = useState([])
+    const [allIssues, setAllIssues] = useState([])
 
     useEffect(() => {
         (async () => {
             // Can be done using resolvers
             // TO get all issues 
-            const data = await invoke('getAllIssues', { project_name: project });
-            console.log("get all issues", data)
-            setData(data)
+            if (selectedUser.length == 0) {
+                const data = await invoke('getAllIssues', { project_name: project });
+                console.log("get all issues", data)
+                const userList = data.map(item => item.assignee)
+                // remove duplicate object from array
+                const uniqueUser = [...new Map(userList.map((item) => [item["accountId"], item])).values()]
+                setUserList(uniqueUser.filter(item => Object.keys(item).length))
+                setAllIssues(data)
+            } else {
+                const data = await invoke('getAllIssues', { project_name: project });
+                const userList = data.map(item => item.assignee)
+                // remove duplicate object from array
+                const uniqueUser = [...new Map(userList.map((item) => [item["accountId"], item])).values()]
+                setUserList(uniqueUser.filter(item => Object.keys(item).length))
+                const filteredData = data.filter(item => {
+                    if (selectedUser.length == 0) {
+                        return item;
+                    } else {
+                        return selectedUser.includes(item.assignee.accountId);
+                    }
+                })
+                setAllIssues(filteredData)
+            }
         })();
-    }, []);
+    }, [project, selectedUser]);
 
-    useEffect(() => {
-        const projectList = data.map(item => item.project)
+    // useEffect(() => {
 
-        const uniqueProjectList = [...new Map(projectList.map(item =>
-            [item["project_id"], item])).values()];
+    //     // get user list from search issues api
+    //     const userList = allIssues.map(item => item.assignee)
+    //     // remove duplicate object from array
+    //     const uniqueUser = [...new Map(userList.map((item) => [item["accountId"], item])).values()]
+    //     setUserList(uniqueUser.filter(item => Object.keys(item).length))
 
+    // }, [allIssues])
 
-        console.log("projectList", uniqueProjectList)
-        setProjectList(uniqueProjectList)
-
-    }, [data])
-
+    console.log("userList", userList)
 
     return (
         <div className={styles.HomePage}>
@@ -44,8 +61,8 @@ const TaskEstimate = () => {
                 <span className={styles.anotherHeading}>Task Estimates</span>
             </div>
             <div className={styles.mainContainer}>
-                <Filter setProject={setProject} setSelectedUser={setSelectedUser} selectedUser={selectedUser} count={count} setCount={setCount} />
-                <Table project={project} selectedUser={selectedUser} count={count} />
+                <Filter setProject={setProject} setSelectedUser={setSelectedUser} selectedUser={selectedUser} userList={userList} />
+                <Table project={project} selectedUser={selectedUser} allIssues={allIssues} />
             </div>
         </div>
     )

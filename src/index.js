@@ -72,20 +72,23 @@ resolver.define('getAllIssues', async (req) => {
           summary: item.fields.summary,
           iconUrl: item.fields.issuetype.iconUrl,
           description: item.fields.description != null ? item.fields.description.content.length > 0 ? item.fields.description.content[0].content[0].text : "" : "",
-          assignee: item.fields.assignee == null ? "" : item.fields.assignee.avatarUrls["24x24"],
-          assigneeId: item.fields.assignee == null  ? "":item.fields.assignee.accountId ,
+          assignee: item.fields.assignee == null ? {} : {
+            accountId: item.fields.assignee.accountId,
+            assigneeUrl: item.fields.assignee.avatarUrls["24x24"],
+            displayName: item.fields.assignee.displayName,
+          },
           startDate: item.fields.customfield_10015,
           duedate: item.fields.dueDate,
           project: {
-            porject_id:item.fields.project.id,
-            porject_key:item.fields.project.key,
-              },
-           priorityUrl: item.fields.priority.iconUrl,
+            project_id: item.fields.project.id,
+            project_key: item.fields.project.key,
+          },
+          priorityUrl: item.fields.priority.iconUrl,
         }
       })
 
       return issuesData;
-    }else{
+    } else {
       const response = await api
 
         .asApp()
@@ -106,15 +109,18 @@ resolver.define('getAllIssues', async (req) => {
           summary: item.fields.summary,
           iconUrl: item.fields.issuetype.iconUrl,
           description: item.fields.description != null ? item.fields.description.content.length > 0 ? item.fields.description.content[0].content[0].text : "" : "",
-          assignee: item.fields.assignee == null ? "" : item.fields.assignee.avatarUrls["24x24"],
-          assigneeId: item.fields.assignee == null  ? "":item.fields.assignee.accountId ,
+          assignee: item.fields.assignee == null ? {} : {
+            accountId: item.fields.assignee.accountId,
+            assigneeUrl: item.fields.assignee.avatarUrls["24x24"],
+            displayName: item.fields.assignee.displayName,
+          },
           startDate: item.fields.customfield_10015,
           duedate: item.fields.dueDate,
           project: {
-            project_id:item.fields.project.id,
-            project_key:item.fields.project.key,
-              },
-           priorityUrl: item.fields.priority.iconUrl,
+            project_id: item.fields.project.id,
+            project_key: item.fields.project.key,
+          },
+          priorityUrl: item.fields.priority.iconUrl,
         }
       })
 

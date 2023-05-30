@@ -8,31 +8,9 @@ import { invoke } from '@forge/bridge';
 
 
 const Table = (props) => {
-  const { project, selectedUser, count } = props
+  const { project, selectedUser, allIssues } = props
 
   const [columns, setColumns] = useState([]);
-  const [allIssues, setAllIssues] = useState([])
-  useEffect(() => {
-    (async () => {
-      // Can be done using resolvers
-      // TO get all issues 
-      if (selectedUser.length == 0) {
-        const data = await invoke('getAllIssues', { project_name: project });
-        console.log("get all issues", data)
-        setAllIssues(data)
-      } else {
-        const data = await invoke('getAllIssues', { project_name: project });
-        const filteredData = data.filter(item => {
-          if (selectedUser.length == 0) {
-            return item;
-          } else {
-            return selectedUser.includes(item.assigneeId);
-          }
-        })
-        setAllIssues(filteredData)
-      }
-    })();
-  }, [project, selectedUser]);
 
   const columnsFromBackend = {
     [uuidv4()]: {
@@ -218,7 +196,8 @@ const Table = (props) => {
                                         <div className={styles.key}>{item.key}</div>
                                       </div>
                                       <div>
-                                        {item.assignee.length === 0 ? <></> : <Avatar appearance="square" size="small" src={item.assignee} name="url" />}
+                                        <Avatar appearance="square" size="small" src={item.priorityUrl} name="priority url" />
+                                        {Object.keys(item.assignee).length === 0 ? <></> : <Avatar appearance="square" size="small" src={item.assignee.assigneeUrl} name="user url" />}
                                       </div>
                                     </div>
                                   </div>
