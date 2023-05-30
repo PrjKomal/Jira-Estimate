@@ -82,18 +82,26 @@
 
 }
 
-
-.estimateBox {
-
-    span {
-        font-size: 12px;
-    }
-}
-
 .orginalEstimate {
     width: fit-content;
     border-radius: 8px;
     background-color: #F5F6F8;
     text-align: center;
     padding: 0px 7px;
+}
+
+.partitionBox{
+    width: 100px;
+    background-color: lightgray;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    padding: 3px;
+    div{
+        border: 1px solid #F5F6F8;
+    }
+    span {
+        font-size: 12px;
+    }
 }

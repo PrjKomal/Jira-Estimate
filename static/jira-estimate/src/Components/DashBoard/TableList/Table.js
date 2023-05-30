@@ -129,24 +129,33 @@ const Table = (props) => {
     }
   };
 
-  const [isInputOpen, setIsInputOpen] = useState("")
-  const handleInput = (e, id) => {
-    const ID = e.target.id
-    if(id == ID){
+  const [isInputOpen, setIsInputOpen] = useState(false)
+  const [state, setState] = useState("")
+  const handleClick = (e, id) => {
+    const parentId = e.target.parentElement.id
+    const ownId = e.target.id;
+    if (parentId == id) {
+      setState(ownId)
       setIsInputOpen(id)
     }
+
   }
 
-  const [input, setInput] = useState("0m")
-  const handleInputChange = (e) => {
-    setInput(e.target.value)
+  const [estimateInput, setEstimateInput] = useState("0m")
+  const [originalInput, setOriginalInput] = useState("1d")
+  const handleEstimateChange = (e) => {
+    setEstimateInput(e.target.value)
   }
-const handleBlur = (e, id)=>{
-  const ID = e.target.id
-    if(id == ID){
+  const handleOriginalChange = (e) => {
+    setOriginalInput(e.target.value)
+  }
+  const handleBlur = (e, id) => {
+    const parentId = e.target.parentElement.id
+    if (parentId == id) {
+      setState("")
       setIsInputOpen("")
     }
-}
+  }
 
 
   return (
@@ -214,10 +223,13 @@ const handleBlur = (e, id)=>{
                                         />
                                         <div className={styles.key}>{item.key}</div>
                                       </div>
-                                      <div className={isInputOpen === item.id ?  styles.userBoxActive:styles.userBox}>
-                                        {isInputOpen === item.id ? <input id={item.id} type="text" className={styles.inputBox} value={input} onChange={handleInputChange} onBlur={(e)=>handleBlur(e,item.id)} /> : <div id={item.id} className={styles.estimateBox} onClick={(e)=>handleInput(e,item.id)}>
-                                          <span id={item.id} className={styles.orginalEstimate}>{input}</span>
-                                        </div>}
+                                      <div className={isInputOpen === item.id  ? styles.userBoxActive : styles.userBox}>
+                                        {isInputOpen === item.id  ? <input id={item.id} type="text" className={styles.inputBox} value={state === "estimate" ? estimateInput : originalInput} onChange={state === "estimate" ? handleEstimateChange : handleOriginalChange} onBlur={(e) => handleBlur(e, item.id)} /> :
+                                          <div id={item.id} className={styles.partitionBox} >
+                                            <span id="estimate" onClick={(e) => handleClick(e, item.id)}>{estimateInput}</span>
+                                            <div></div>
+                                            <span id="original" onClick={(e) => handleClick(e, item.id)} >{originalInput}</span>
+                                          </div>}
 
                                         <img src={item.priorityUrl} name="priority url" />
                                         {Object.keys(item.assignee).length === 0 ? <></> : <img src={item.assignee.assigneeUrl} name="user url" />}
