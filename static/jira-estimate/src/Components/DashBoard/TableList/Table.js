@@ -146,7 +146,7 @@ const Table = (props) => {
       });
     }
   };
-  console.log('allIssues', allIssues)
+  console.log('allIssues', columns)
   const [state, setState] = useState("")
   const [isInputOpen, setIsInputOpen] = useState(false);
   const [values, setValues] = useState({}); // Updated to store values for each card
