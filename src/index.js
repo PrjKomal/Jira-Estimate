@@ -65,7 +65,7 @@ resolver.define('getAllIssues', async (req) => {
         );
       const data = await response.json();
 
-      const issuesData = data.issues.map(item => {
+      const issuesData = data.issues.filter((item)=> item.fields.issuetype.name !== "Epic").map(item => {
         return {
           id: item.id,
           key: item.key,
@@ -102,7 +102,7 @@ resolver.define('getAllIssues', async (req) => {
         );
       const data = await response.json();
 
-      const issuesData = data.issues.map(item => {
+      const issuesData = data.issues.filter((item)=> item.fields.issuetype.name !== "Epic").map(item => {
         return {
           id: item.id,
           key: item.key,
