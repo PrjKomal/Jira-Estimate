@@ -103,6 +103,15 @@ const Table = (props) => {
       const destItems = [...destColumn.items];
       const [removed] = sourceItems.splice(source.index, 1);
       destItems.splice(destination.index, 0, removed);
+      const updatedCards = destItems.map((item, index) => {
+        if (index === destination.index) {
+          console.log("index", index)
+          console.log("index", destination.index)
+          console.log("index", new Date().toISOString().split('T')[0])
+          return { ...item, startDate: new Date().toISOString().split('T')[0] };
+        }
+        return item;
+      });
       setColumns({
         ...columns,
         [source.droppableId]: {
@@ -111,7 +120,7 @@ const Table = (props) => {
         },
         [destination.droppableId]: {
           ...destColumn,
-          items: destItems
+          items: updatedCards
         }
       });
     } else {
@@ -119,16 +128,25 @@ const Table = (props) => {
       const copiedItems = [...column.items];
       const [removed] = copiedItems.splice(source.index, 1);
       copiedItems.splice(destination.index, 0, removed);
+      const updatedCards = destItems.map((item, index) => {
+        if (index === destination.index) {
+          console.log("index", index)
+          console.log("index", destination.index)
+          console.log("index", new Date().toISOString().split('T')[0])
+          return { ...item, startDate: new Date().toISOString().split('T')[0] };
+        }
+        return item;
+      });
       setColumns({
         ...columns,
         [source.droppableId]: {
           ...column,
-          items: copiedItems
+          items: updatedCards
         }
       });
     }
   };
-
+  console.log('allIssues', allIssues)
   const [state, setState] = useState("")
   const [isInputOpen, setIsInputOpen] = useState(false);
   const [values, setValues] = useState({}); // Updated to store values for each card
@@ -185,7 +203,7 @@ const Table = (props) => {
                         }}
                       >
                         {column.items.map((item, index) => {
-                           const inputId = `input-${item.id}`;
+                          const inputId = `input-${item.id}`;
                           return (
                             <Draggable
                               key={item.id}
