@@ -129,33 +129,33 @@ const Table = (props) => {
     }
   };
 
-  const [isInputOpen, setIsInputOpen] = useState(false)
   const [state, setState] = useState("")
+  const [isInputOpen, setIsInputOpen] = useState(false);
+  const [values, setValues] = useState({}); // Updated to store values for each card
+
   const handleClick = (e, id) => {
-    const parentId = e.target.parentElement.id
+    const parentId = e.target.parentElement.id;
     const ownId = e.target.id;
-    if (parentId == id) {
+    if (parentId === id) {
+      setIsInputOpen(id);
       setState(ownId)
-      setIsInputOpen(id)
     }
+  };
 
-  }
+  const handleChange = (e, id) => {
+    const inputId = id.toString() + "-" + state
+    // console.log(s)
+    const value = e.target.value;
 
-  const [estimateInput, setEstimateInput] = useState("0m")
-  const [originalInput, setOriginalInput] = useState("1d")
-  const handleEstimateChange = (e) => {
-    setEstimateInput(e.target.value)
-  }
-  const handleOriginalChange = (e) => {
-    setOriginalInput(e.target.value)
-  }
+    setValues((prevValues) => ({
+      ...prevValues,
+      [inputId]: value, // Store the value for the specific card id
+    }));
+  };
+
   const handleBlur = (e, id) => {
-    const parentId = e.target.parentElement.id
-    if (parentId == id) {
-      setState("")
-      setIsInputOpen("")
-    }
-  }
+    setIsInputOpen("");
+  };
 
 
   return (
@@ -185,6 +185,7 @@ const Table = (props) => {
                         }}
                       >
                         {column.items.map((item, index) => {
+                           const inputId = `input-${item.id}`;
                           return (
                             <Draggable
                               key={item.id}
@@ -223,12 +224,21 @@ const Table = (props) => {
                                         />
                                         <div className={styles.key}>{item.key}</div>
                                       </div>
-                                      <div className={isInputOpen === item.id  ? styles.userBoxActive : styles.userBox}>
-                                        {isInputOpen === item.id  ? <input id={item.id} type="text" className={styles.inputBox} value={state === "estimate" ? estimateInput : originalInput} onChange={state === "estimate" ? handleEstimateChange : handleOriginalChange} onBlur={(e) => handleBlur(e, item.id)} /> :
+                                      <div className={isInputOpen === item.id ? styles.userBoxActive : styles.userBox}>
+                                        {isInputOpen === item.id ?
+                                          <input
+                                            id={inputId}
+                                            type="text"
+                                            className={styles.inputBox}
+                                            value={values[item.id.toString() + '-' + state] || ""} // Get the value from the state
+                                            onChange={(e) => handleChange(e, item.id)} // Pass the card id to handleChange
+                                            onBlur={(e) => handleBlur(e, item.id)} // Pass the card id to handleBlur
+                                          /> :
+
                                           <div id={item.id} className={styles.partitionBox} >
-                                            <span id="estimate" onClick={(e) => handleClick(e, item.id)}>{estimateInput}</span>
+                                            <span id="actual" onClick={(e) => handleClick(e, item.id)}>{values[item.id.toString() + '-actual'] || "0m"}</span>
                                             <div></div>
-                                            <span id="original" onClick={(e) => handleClick(e, item.id)} >{originalInput}</span>
+                                            <span id="original" onClick={(e) => handleClick(e, item.id)} >{values[item.id.toString() + '-original'] || "0m"}</span>
                                           </div>}
 
                                         <img src={item.priorityUrl} name="priority url" />

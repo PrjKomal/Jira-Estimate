@@ -55,7 +55,7 @@
 }
 
 .userBox {
-    width: 75px;
+    width: 80px;
     display: flex;
 
     img {
@@ -91,7 +91,7 @@
 }
 
 .partitionBox{
-    width: 100px;
+    width: fit-content;
     background-color: lightgray;
     border-radius: 8px;
     display: flex;
@@ -103,5 +103,6 @@
     }
     span {
         font-size: 12px;
+        cursor: pointer;
     }
 }
