@@ -131,5 +131,34 @@ resolver.define('getAllIssues', async (req) => {
   }
 });
 
+
+resolver.define('updateIssue', async (req) => {
+  try {
+    const { date, issueId } = req.payload;
+    console.log("issueId", issueId)
+    console.log("req", req)
+    console.log("req date", date)
+    console.log("req pro", req.context.extension.project)
+    const response = await api
+      .asApp()
+      .requestJira(route`/rest/api/3/issue/${issueId}`, {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fields: {
+            customfield_10015: date
+          },
+        }),
+      });
+    console.log(response.status);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+
 export const handler = resolver.getDefinitions();
 

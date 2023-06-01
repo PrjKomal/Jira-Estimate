@@ -12,6 +12,24 @@ const Table = (props) => {
 
   const [columns, setColumns] = useState([]);
 
+  const [columnName, setColumnName] = useState("")
+  const [issueId, setIssueId] = useState("")
+
+  useEffect(() => {
+    (async () => {
+      // Can be done using resolvers
+      // TO update date in issue 
+      if (columnName && issueId) {
+        console.log("fsgfdgbvbgh")
+        const date = new Date().toISOString().split('T')[0];
+        const response = await invoke('updateIssue', { date, issueId })
+        console.log("response", response)
+        setColumnName("")
+      }
+    })();
+  }, [columnName, issueId]);
+
+
   const columnsFromBackend = {
     [uuidv4()]: {
       name: "Estimates",
@@ -94,9 +112,12 @@ const Table = (props) => {
 
   const onDragEnd = (result, columns, setColumns) => {
     if (!result.destination) return;
-    const { source, destination } = result;
-
+    const { source, destination, draggableId } = result;
     if (source.droppableId !== destination.droppableId) {
+      const columnName = columns[destination.droppableId].name
+      setColumnName(columnName)
+      setIssueId(draggableId)
+      console.log("columnName", columnName)
       const sourceColumn = columns[source.droppableId];
       const destColumn = columns[destination.droppableId];
       const sourceItems = [...sourceColumn.items];
@@ -128,20 +149,11 @@ const Table = (props) => {
       const copiedItems = [...column.items];
       const [removed] = copiedItems.splice(source.index, 1);
       copiedItems.splice(destination.index, 0, removed);
-      const updatedCards = destItems.map((item, index) => {
-        if (index === destination.index) {
-          console.log("index", index)
-          console.log("index", destination.index)
-          console.log("index", new Date().toISOString().split('T')[0])
-          return { ...item, startDate: new Date().toISOString().split('T')[0] };
-        }
-        return item;
-      });
       setColumns({
         ...columns,
         [source.droppableId]: {
           ...column,
-          items: updatedCards
+          items: copiedItems
         }
       });
     }
