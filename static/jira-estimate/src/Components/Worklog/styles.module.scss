@@ -1,0 +1,118 @@
+.AnotherPageContainer {
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    min-height: 665px;
+    width: 97%;
+
+
+
+    .UserNameList {
+        width: 95px;
+        height: auto;
+        background: #F4F5F7 0% 0% no-repeat padding-box;
+        border-radius: 5px;
+        opacity: 1;
+        display: flex;
+        flex-direction: column;
+        margin: 8px;
+
+        .columnName {
+            margin-top: 16px;
+            margin-left: 15px;
+            font-size: 16px;
+            letter-spacing: 0px;
+            color: #42526E;
+            font-weight: 600;
+        }
+
+        .userBox {
+            display: flex;
+            justify-content: space-between;
+            width: 55px;
+            margin-top: 51px;
+            margin-bottom: 60px;
+
+            .arrow {
+                width: 8px;
+                height: 15px;
+                opacity: 1;
+                margin-top: 6px;
+            }
+
+            .userImg {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+    }
+
+    .Columns {
+        width: 255px;
+        height: auto;
+        background: #F4F5F7 0% 0% no-repeat padding-box;
+        border-radius: 5px;
+        opacity: 1;
+        display: flex;
+        flex-direction: column;
+        margin: 8px;
+
+        .columnName {
+            margin-top: 16px;
+            margin-left: 21px;
+            font-size: 16px;
+            letter-spacing: 0px;
+            color: #42526E;
+            font-weight: 600;
+        }
+    }
+
+    .TotalList {
+        width: 155px;
+        height: auto;
+        background: #F4F5F7 0% 0% no-repeat padding-box;
+        border-radius: 5px;
+        opacity: 1;
+        display: flex;
+        flex-direction: column;
+        margin: 8px;
+
+        .columnName {
+            margin-top: 16px;
+            margin-left: 15px;
+            font-size: 16px;
+            letter-spacing: 0px;
+            color: #42526E;
+            font-weight: 600;
+        }
+    }
+}
+
+.DataBox {
+    padding-top: 10px;
+    width: 220px;
+    min-height: 500px;
+    margin-left: 13px;
+}
+
+.cardBox {
+    width: 225px;
+    height: 54px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 2px #00000029;
+    border-radius: 8px;
+    opacity: 1;
+    margin-top: 51px;
+    margin-bottom: 60px;
+
+    .time {
+        width: auto;
+        height: 21px;
+        text-align: left;
+        font-size: 16px;
+        color: #000000;
+        padding-top: 13px;
+        margin: 0px 14px;
+    }
+}
