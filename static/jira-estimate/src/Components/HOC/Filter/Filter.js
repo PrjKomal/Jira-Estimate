@@ -68,8 +68,6 @@ const Filter = (props) => {
     }
   }
 
-  console.log("selectedUser", selectedUser)
-
   return (
     <div className={styles.filterContainer}>
       <div className={showItems ? styles.select_box__box_active : styles.select_box__box}>

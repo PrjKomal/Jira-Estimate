@@ -16,7 +16,6 @@ const TaskEstimate = () => {
             // TO get all issues 
             if (selectedUser.length == 0) {
                 const data = await invoke('getAllIssues', { project_name: project });
-                console.log("get all issues", data)
                 const userList = data.map(item => item.assignee)
                 // remove duplicate object from array
                 const uniqueUser = [...new Map(userList.map((item) => [item["accountId"], item])).values()]
@@ -40,17 +39,6 @@ const TaskEstimate = () => {
         })();
     }, [project, selectedUser]);
 
-    // useEffect(() => {
-
-    //     // get user list from search issues api
-    //     const userList = allIssues.map(item => item.assignee)
-    //     // remove duplicate object from array
-    //     const uniqueUser = [...new Map(userList.map((item) => [item["accountId"], item])).values()]
-    //     setUserList(uniqueUser.filter(item => Object.keys(item).length))
-
-    // }, [allIssues])
-
-    console.log("userList", userList)
 
     return (
         <div className={styles.HomePage}>

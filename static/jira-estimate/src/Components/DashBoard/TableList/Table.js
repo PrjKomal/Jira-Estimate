@@ -20,11 +20,10 @@ const Table = (props) => {
       // Can be done using resolvers
       // TO update date in issue 
       if (columnName && issueId) {
-        console.log("fsgfdgbvbgh")
         const date = new Date().toISOString().split('T')[0];
-        const response = await invoke('updateIssue', { date, issueId })
-        console.log("response", response)
+        await invoke('updateIssue', { date, issueId })
         setColumnName("")
+        setIssueId("")
       }
     })();
   }, [columnName, issueId]);
@@ -117,22 +116,12 @@ const Table = (props) => {
       const columnName = columns[destination.droppableId].name
       setColumnName(columnName)
       setIssueId(draggableId)
-      console.log("columnName", columnName)
       const sourceColumn = columns[source.droppableId];
       const destColumn = columns[destination.droppableId];
       const sourceItems = [...sourceColumn.items];
       const destItems = [...destColumn.items];
       const [removed] = sourceItems.splice(source.index, 1);
       destItems.splice(destination.index, 0, removed);
-      const updatedCards = destItems.map((item, index) => {
-        if (index === destination.index) {
-          console.log("index", index)
-          console.log("index", destination.index)
-          console.log("index", new Date().toISOString().split('T')[0])
-          return { ...item, startDate: new Date().toISOString().split('T')[0] };
-        }
-        return item;
-      });
       setColumns({
         ...columns,
         [source.droppableId]: {
@@ -141,7 +130,7 @@ const Table = (props) => {
         },
         [destination.droppableId]: {
           ...destColumn,
-          items: updatedCards
+          items: destItems
         }
       });
     } else {
@@ -158,7 +147,6 @@ const Table = (props) => {
       });
     }
   };
-  console.log('allIssues', columns)
   const [state, setState] = useState("")
   const [isInputOpen, setIsInputOpen] = useState(false);
   const [values, setValues] = useState({}); // Updated to store values for each card
@@ -174,7 +162,7 @@ const Table = (props) => {
 
   const handleChange = (e, id) => {
     const inputId = id.toString() + "-" + state
-    // console.log(s)
+
     const value = e.target.value;
 
     setValues((prevValues) => ({

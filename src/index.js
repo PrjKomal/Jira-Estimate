@@ -49,7 +49,6 @@ resolver.define('getAllUsers', async (req) => {
 
 resolver.define('getAllIssues', async (req) => {
   try {
-    console.log("req", req)
     const project_name = req.payload.project_name
     if (!project_name) {
       const response = await api
@@ -135,10 +134,6 @@ resolver.define('getAllIssues', async (req) => {
 resolver.define('updateIssue', async (req) => {
   try {
     const { date, issueId } = req.payload;
-    console.log("issueId", issueId)
-    console.log("req", req)
-    console.log("req date", date)
-    console.log("req pro", req.context.extension.project)
     const response = await api
       .asApp()
       .requestJira(route`/rest/api/3/issue/${issueId}`, {
