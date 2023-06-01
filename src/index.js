@@ -25,28 +25,6 @@ resolver.define('getAllProjects', async (req) => {
 });
 
 
-resolver.define('getAllUsers', async (req) => {
-  try {
-    const response = await api
-      .asApp()
-      .requestJira(
-        route`/rest/api/3/users`,
-        {
-          headers: {
-            Accept: 'application/json',
-          },
-        }
-      );
-
-    const data = await response.json();
-    const filterData = data.filter(item => item.accountType === "atlassian" && item.active === true)
-
-    return filterData;
-  } catch (error) {
-    console.log(error);
-  }
-});
-
 resolver.define('getAllIssues', async (req) => {
   try {
     const project_name = req.payload.project_name
@@ -64,7 +42,7 @@ resolver.define('getAllIssues', async (req) => {
         );
       const data = await response.json();
 
-      const issuesData = data.issues.filter((item)=> item.fields.issuetype.name !== "Epic").map(item => {
+      const issuesData = data.issues.filter((item) => item.fields.issuetype.name !== "Epic").map(item => {
         return {
           id: item.id,
           key: item.key,
@@ -83,6 +61,7 @@ resolver.define('getAllIssues', async (req) => {
             project_key: item.fields.project.key,
           },
           priorityUrl: item.fields.priority.iconUrl,
+          status: item.fields.status.name
         }
       })
 
@@ -101,7 +80,7 @@ resolver.define('getAllIssues', async (req) => {
         );
       const data = await response.json();
 
-      const issuesData = data.issues.filter((item)=> item.fields.issuetype.name !== "Epic").map(item => {
+      const issuesData = data.issues.filter((item) => item.fields.issuetype.name !== "Epic").map(item => {
         return {
           id: item.id,
           key: item.key,
@@ -120,6 +99,7 @@ resolver.define('getAllIssues', async (req) => {
             project_key: item.fields.project.key,
           },
           priorityUrl: item.fields.priority.iconUrl,
+          status: item.fields.status.name
         }
       })
 

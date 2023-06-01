@@ -55,7 +55,7 @@
 }
 
 .userBox {
-    width: 80px;
+    width: 92px;
     display: flex;
 
     img {
@@ -82,27 +82,39 @@
 
 }
 
-.orginalEstimate {
-    width: fit-content;
-    border-radius: 8px;
-    background-color: #F5F6F8;
-    text-align: center;
-    padding: 0px 7px;
-}
-
-.partitionBox{
-    width: fit-content;
+.partitionBox {
+    width: 100px;
     background-color: lightgray;
     border-radius: 8px;
     display: flex;
     justify-content: space-around;
     text-align: center;
-    padding: 3px;
-    div{
-        border: 1px solid #F5F6F8;
+
+    .originalEstimate {
+        width: 25px;
+        height: auto;
+        border-radius: 8px 0px 0px 8px
     }
-    span {
-        font-size: 12px;
-        cursor: pointer;
+
+    .actualEstimate {
+        width: 25px;
+        height: auto;
+        border-left: 2px solid #E5E5E5;
+        border-radius: 0px 8px 8px 0px
     }
+    .InProgress{
+        width: 25px;
+        height: auto;
+        border-radius: 0px 8px 8px 0px;
+        background-color: blue;
+        color: #FFFFFF;
+    }
+    .Done{
+        width: 25px;
+        height: auto;
+        border-radius: 0px 8px 8px 0px;
+        background-color: green;
+        color: #FFFFFF;
+    }
+
 }
