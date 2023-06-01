@@ -16,8 +16,9 @@ const TaskEstimate = () => {
             // TO get all issues 
             if (selectedUser.length == 0) {
                 const data = await invoke('getAllIssues', { project_name: project });
+               //get user list
                 const userList = data.map(item => item.assignee)
-                // remove duplicate object from array
+                // remove duplicate user from array
                 const uniqueUser = [...new Map(userList.map((item) => [item["accountId"], item])).values()]
                 setUserList(uniqueUser.filter(item => Object.keys(item).length))
                 setAllIssues(data)
