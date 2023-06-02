@@ -259,7 +259,7 @@ const Table = (props) => {
                                           </div>}
 
                                         <img src={item.priorityUrl} name="priority url" className={styles.priorityImg}/>
-                                        {Object.keys(item.assignee).length === 0 ? <div></div> : <img src={item.assignee.assigneeUrl} name="user url" />}
+                                        {Object.keys(item.assignee).length === 0 ? <div className={styles.blankDiv}></div> : <img src={item.assignee.assigneeUrl} name="user url" />}
                                       </div>
 
                                     </div>

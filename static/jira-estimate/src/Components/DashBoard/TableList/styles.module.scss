@@ -56,7 +56,7 @@
 }
 
 .userBox {
-    width: 89px;
+    width: 93px;
     display: flex;
     justify-content: space-between;
 
@@ -82,6 +82,10 @@
     .priorityImg {
         width: 10px;
     }   
+    .blankDiv{
+        width: 24px;
+        height: 24px;
+    }
 }
 
 .inputBox {
