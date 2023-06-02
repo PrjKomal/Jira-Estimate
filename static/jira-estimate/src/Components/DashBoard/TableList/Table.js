@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import Avatar from '@atlaskit/avatar';
 import { invoke } from '@forge/bridge';
+import Tooltip from '@atlaskit/tooltip';
 
 
 
@@ -258,8 +259,13 @@ const Table = (props) => {
                                             <div id="actual" className={(item.status === "In Progress" || item.status === "QA") ? styles.InProgress : item.status === "Done" ? styles.Done : styles.actualEstimate} onClick={(e) => handleClick(e, item.id)}>{values[item.id.toString() + '-actual'] || "0m"}</div>
                                           </div>}
 
-                                        <img src={item.priorityUrl} name="priority url" className={styles.priorityImg}/>
-                                        {Object.keys(item.assignee).length === 0 ? <div className={styles.blankDiv}></div> : <img src={item.assignee.assigneeUrl} name="user url" />}
+                                        <img src={item.priorityUrl} name="priority url" className={styles.priorityImg} />
+                                        {Object.keys(item.assignee).length === 0 ? <div className={styles.blankDiv}></div> :
+                                          <Tooltip content={item.assignee.displayName}>
+                                            {(tooltipProps) => (
+                                              <img src={item.assignee.assigneeUrl} name="user url" {...tooltipProps}/>
+                                            )}
+                                          </Tooltip>}
                                       </div>
 
                                     </div>
