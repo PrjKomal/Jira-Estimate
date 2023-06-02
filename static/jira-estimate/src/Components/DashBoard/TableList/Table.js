@@ -32,7 +32,7 @@ const Table = (props) => {
 
   const columnsFromBackend = {
     [uuidv4()]: {
-      name: "Estimates",
+      name: "Not Tracked",
       items: allIssues.filter(item => {
         if (item.startDate === null) {
           return item;

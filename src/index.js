@@ -113,6 +113,7 @@ resolver.define('getAllIssues', async (req) => {
 
 resolver.define('updateIssue', async (req) => {
   try {
+    console.log("request", req)
     const { date, issueId } = req.payload;
     const response = await api
       .asApp()
