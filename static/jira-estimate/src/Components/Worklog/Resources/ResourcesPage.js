@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styles from './styles.module.scss';
 import { v4 as uuidv4 } from 'uuid';
-import  rightArrowIcon from '../../assests/images/Icon awesome-caret-down.svg';
-import  downArrowIcon from '../../assests/images/Icon awesome-caret-down (1).svg';
+import  rightArrowIcon from '../../../assests/images/Icon awesome-caret-down.svg';
+import  downArrowIcon from '../../../assests/images/Icon awesome-caret-down (1).svg';
 
 const ResourcesPage = () => {
   const allIssues = [

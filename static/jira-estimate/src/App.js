@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
 import { view } from "@forge/bridge";
 import HomePage from "./pages/HomePage";
-import Worklog from "./pages/Worklog";
+import WorklogPage from "./pages/WorklogPage";
 
 
 function App() {
@@ -46,7 +46,7 @@ function App() {
                 >
                     <Routes>
                         <Route path="/task-estimate" element={<HomePage />}></Route>
-                        <Route path="/worklog" element={<Worklog />}></Route>
+                        <Route path="/worklog" element={<WorklogPage />}></Route>
                     </Routes>
                 </Router>
             ) : (
