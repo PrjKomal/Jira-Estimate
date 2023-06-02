@@ -199,7 +199,7 @@ const Table = (props) => {
                           paddingTop: 10,
                           width: 220,
                           minHeight: 500,
-                          marginLeft: 13
+                          marginLeft: 8
                         }}
                       >
                         {column.items.map((item, index) => {
@@ -220,8 +220,8 @@ const Table = (props) => {
                                       userSelect: "none",
                                       padding: 16,
                                       margin: "0 0 8px 0",
-                                      width: "189px",
-                                      height: "110px",
+                                      width: "198px",
+                                      height: "104px",
                                       backgroundColor: "#FFFFFF",
                                       boxShadow: " 0px 2px 2px #00000029",
                                       borderRadius: "8px",
@@ -258,8 +258,8 @@ const Table = (props) => {
                                             <div id="actual" className={(item.status === "In Progress" || item.status === "QA") ? styles.InProgress : item.status === "Done" ? styles.Done : styles.actualEstimate} onClick={(e) => handleClick(e, item.id)}>{values[item.id.toString() + '-actual'] || "0m"}</div>
                                           </div>}
 
-                                        <img src={item.priorityUrl} name="priority url" />
-                                        {Object.keys(item.assignee).length === 0 ? <></> : <img src={item.assignee.assigneeUrl} name="user url" />}
+                                        <img src={item.priorityUrl} name="priority url" className={styles.priorityImg}/>
+                                        {Object.keys(item.assignee).length === 0 ? <div></div> : <img src={item.assignee.assigneeUrl} name="user url" />}
                                       </div>
 
                                     </div>
