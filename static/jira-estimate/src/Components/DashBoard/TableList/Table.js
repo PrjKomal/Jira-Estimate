@@ -221,7 +221,7 @@ const Table = (props) => {
                                       userSelect: "none",
                                       padding: 16,
                                       margin: "0 0 8px 0",
-                                      width: "198px",
+                                      width: "200px",
                                       height: "104px",
                                       backgroundColor: "#FFFFFF",
                                       boxShadow: " 0px 2px 2px #00000029",
