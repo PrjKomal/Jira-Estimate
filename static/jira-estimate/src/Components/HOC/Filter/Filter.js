@@ -126,7 +126,7 @@ const Filter = (props) => {
                 return (
                   <label className={styles.user2} htmlFor={item.displayName} key={item.accountId}>
                     <input type='checkbox' id={item.displayName} onChange={(e) => handleOnchange(e, item.accountId)} />
-                    <img src={item.avatarUrls['24x24']} htmlFor={item.displayName} />
+                    <img src={item.assigneeUrl} htmlFor={item.displayName} />
                     <span htmlFor={item.displayName}>{item.displayName}</span>
                   </label>
                 )
