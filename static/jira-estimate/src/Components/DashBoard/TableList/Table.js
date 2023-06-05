@@ -255,8 +255,8 @@ const Table = (props) => {
                                           /> :
 
                                           <div id={item.id} className={styles.partitionBox} >
-                                            <div id="original" className={styles.originalEstimate} onClick={(e) => handleClick(e, item.id)} >{values[item.id.toString() + '-original'] || "0m"}</div>
-                                            <div id="actual" className={(item.status === "In Progress" || item.status === "QA") ? styles.InProgress : item.status === "Done" ? styles.Done : styles.actualEstimate} onClick={(e) => handleClick(e, item.id)}>{values[item.id.toString() + '-actual'] || "0m"}</div>
+                                            <div id="original" className={styles.originalEstimate} onClick={(e) => handleClick(e, item.id)} title='Original Estimate'>{values[item.id.toString() + '-original'] || "0m"}</div>
+                                            <div id="actual" title='Actual Estimate' className={(item.status === "In Progress" || item.status === "QA") ? styles.InProgress : item.status === "Done" ? styles.Done : styles.actualEstimate}>0m</div>
                                           </div>}
 
                                         <img src={item.priorityUrl} name="priority url" className={styles.priorityImg} />

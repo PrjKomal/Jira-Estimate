@@ -130,6 +130,8 @@
         border-left: 2px solid #E5E5E5;
         border-radius: 0px 8px 8px 0px;
         font-size: 12px;
+        cursor: default;
+
     }
 
     .InProgress {
@@ -139,6 +141,8 @@
         background-color: blue;
         color: #FFFFFF;
         font-size: 12px;
+        cursor: default;
+
     }
 
     .Done {
@@ -148,6 +152,8 @@
         background-color: green;
         color: #FFFFFF;
         font-size: 12px;
+        cursor: default;
+
     }
 
 }

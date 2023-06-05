@@ -33,7 +33,7 @@ resolver.define('getAllIssues', async (req) => {
 
         .asApp()
         .requestJira(
-          route`/rest/api/3/search`,
+          route`/rest/api/2/search`,
           {
             headers: {
               Accept: 'application/json',
@@ -48,7 +48,7 @@ resolver.define('getAllIssues', async (req) => {
           key: item.key,
           summary: item.fields.summary,
           iconUrl: item.fields.issuetype.iconUrl,
-          description: item.fields.description != null ? item.fields.description.content.length > 0 ? item.fields.description.content[0].content[0].text : "" : "",
+          description: item.fields.description,
           assignee: item.fields.assignee == null ? {} : {
             accountId: item.fields.assignee.accountId,
             assigneeUrl: item.fields.assignee.avatarUrls["24x24"],
@@ -71,7 +71,7 @@ resolver.define('getAllIssues', async (req) => {
 
         .asApp()
         .requestJira(
-          route`/rest/api/3/search?jql=project=${project_name}`,
+          route`/rest/api/2/search?jql=project=${project_name}`,
           {
             headers: {
               Accept: 'application/json',
@@ -86,7 +86,7 @@ resolver.define('getAllIssues', async (req) => {
           key: item.key,
           summary: item.fields.summary,
           iconUrl: item.fields.issuetype.iconUrl,
-          description: item.fields.description != null ? item.fields.description.content.length > 0 ? item.fields.description.content[0].content[0].text : "" : "",
+          description: item.fields.description,
           assignee: item.fields.assignee == null ? {} : {
             accountId: item.fields.assignee.accountId,
             assigneeUrl: item.fields.assignee.avatarUrls["24x24"],
