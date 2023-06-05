@@ -149,7 +149,7 @@ const Table = (props) => {
     }
   };
   const [state, setState] = useState("")
-  const [isInputOpen, setIsInputOpen] = useState(false);
+  const [isInputOpen, setIsInputOpen] = useState("");
   const [values, setValues] = useState({}); // Updated to store values for each card
 
   const handleClick = (e, id) => {
@@ -177,6 +177,11 @@ const Table = (props) => {
   };
 
   const handleOpenIssue = (e, project_key, key) => {
+    if (isInputOpen) {
+      console.log(isInputOpen)
+      e.preventDefault(); // Prevent the default behavior of the click event
+      return;
+    }
     console.log(project_key, key)
     router.open(`https://first-forge-app.atlassian.net/jira/software/projects/${project_key}/boards/1?selectedIssue=${key}`)
   }
