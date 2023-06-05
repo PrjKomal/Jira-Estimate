@@ -223,21 +223,22 @@ const Table = (props) => {
                                     {...provided.dragHandleProps}
                                     style={{
                                       userSelect: "none",
-                                      padding: 16,
+                                      padding: 8,
                                       margin: "0 0 8px 0",
-                                      width: "210px",
-                                      height: "104px",
+                                      width: "225px",
+                                      minHeight: "136px",
+                                      maxHeight: "auto",
                                       backgroundColor: "#FFFFFF",
                                       boxShadow: " 0px 2px 2px #00000029",
                                       borderRadius: "8px",
                                       opacity: 1,
+                                      position: "relative",
                                       ...provided.draggableProps.style
                                     }}
                                     onClick={(e) => handleOpenIssue(e, item.project.project_key, item.key)}
                                   >
                                     <div className={styles.taskName}>{item.summary}</div>
-                                    <div className={styles.taskDescription}>{item.description}</div>
-
+                                    {item.description ? <div className={styles.taskDescription}>{item.description}</div> : <div className={styles.taskDescriptionBlank}></div>}
                                     <div className={styles.taskDetails}>
                                       <div className={styles.imgWithProjectKey}>
                                         <Avatar
