@@ -40,6 +40,13 @@
                 margin-top: 6px;
             }
 
+            .arrowDown {
+                width: 15px;
+                height: 15px;
+                opacity: 1;
+                margin-top: 6px;
+            }
+
             .userImg {
                 width: 30px;
                 height: 30px;
@@ -96,15 +103,37 @@
     margin-left: 13px;
 }
 
+.cardBox2 {
+    width: 145px;
+    height: 54px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 2px #00000029;
+    border-radius: 8px;
+    opacity: 1;
+    margin-top: 38px;
+    margin-left: -8px;
+
+    .time {
+        width: auto;
+        height: 21px;
+        text-align: left;
+        font-size: 16px;
+        color: #000000;
+        padding-top: 13px;
+        margin: 0px 14px;
+    }
+}
+
 .cardBox {
     width: 225px;
     height: 54px;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 0px 2px 2px #00000029;
     border-radius: 8px;
+    margin-left: -8px;
+    margin-top: 38px;
     opacity: 1;
-    margin-top: 51px;
-    margin-bottom: 60px;
+    width: 222px;
 
     .time {
         width: auto;
@@ -165,7 +194,6 @@
         img {
             width: 24px;
             height: 24px;
-            cursor: pointer;
         }
     }
 
@@ -176,7 +204,6 @@
         img {
             width: 24px;
             height: 24px;
-            cursor: pointer;
         }
     }
 
