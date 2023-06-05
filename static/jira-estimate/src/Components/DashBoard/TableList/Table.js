@@ -5,7 +5,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import Avatar from '@atlaskit/avatar';
 import { invoke } from '@forge/bridge';
 import Tooltip from '@atlaskit/tooltip';
-
+import { Link } from 'react-router-dom';
 
 
 const Table = (props) => {
@@ -213,63 +213,64 @@ const Table = (props) => {
                             >
                               {(provided, snapshot) => {
                                 return (
-                                  <div
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                    style={{
-                                      userSelect: "none",
-                                      padding: 16,
-                                      margin: "0 0 8px 0",
-                                      width: "200px",
-                                      height: "104px",
-                                      backgroundColor: "#FFFFFF",
-                                      boxShadow: " 0px 2px 2px #00000029",
-                                      borderRadius: "8px",
-                                      opacity: 1,
-                                      ...provided.draggableProps.style
-                                    }}
-                                  >
-                                    <div className={styles.taskName}>{item.summary}</div>
-                                    <div className={styles.taskDescription}>{item.description}</div>
+                                  <Link to={`https://first-forge-app.atlassian.net/jira/software/projects/${item.project.project_key}/boards/1?selectedIssue=${item.key}`} style={{textDecoration: "none"}} target="_blank">
+                                    <div
+                                      ref={provided.innerRef}
+                                      {...provided.draggableProps}
+                                      {...provided.dragHandleProps}
+                                      style={{
+                                        userSelect: "none",
+                                        padding: 16,
+                                        margin: "0 0 8px 0",
+                                        width: "210px",
+                                        height: "104px",
+                                        backgroundColor: "#FFFFFF",
+                                        boxShadow: " 0px 2px 2px #00000029",
+                                        borderRadius: "8px",
+                                        opacity: 1,
+                                        ...provided.draggableProps.style
+                                      }}
+                                    >
+                                      <div className={styles.taskName}>{item.summary}</div>
+                                      <div className={styles.taskDescription}>{item.description}</div>
 
-                                    <div className={styles.taskDetails}>
-                                      <div className={styles.imgWithProjectKey}>
-                                        <Avatar
-                                          size="xsmall"
-                                          appearance="square"
-                                          src={item.iconUrl}
-                                          name="Nucleus"
-                                        />
-                                        <div className={styles.key}>{item.key}</div>
+                                      <div className={styles.taskDetails}>
+                                        <div className={styles.imgWithProjectKey}>
+                                          <Avatar
+                                            size="xsmall"
+                                            appearance="square"
+                                            src={item.iconUrl}
+                                            name="Nucleus"
+                                          />
+                                          <div className={styles.key}>{item.key}</div>
+                                        </div>
+                                        <div className={isInputOpen === item.id ? styles.userBoxActive : styles.userBox}>
+                                          {isInputOpen === item.id ?
+                                            <input
+                                              id={inputId}
+                                              type="text"
+                                              className={styles.inputBox}
+                                              value={values[item.id.toString() + '-' + state] || ""} // Get the value from the state
+                                              onChange={(e) => handleChange(e, item.id)} // Pass the card id to handleChange
+                                              onBlur={(e) => handleBlur(e, item.id)} // Pass the card id to handleBlur
+                                            /> :
+
+                                            <div id={item.id} className={styles.partitionBox} >
+                                              <div id="original" className={styles.originalEstimate} onClick={(e) => handleClick(e, item.id)} title='Original Estimate'>{values[item.id.toString() + '-original'] || "0m"}</div>
+                                              <div id="actual" title='Actual Estimate' className={(item.status === "In Progress" || item.status === "QA") ? styles.InProgress : item.status === "Done" ? styles.Done : styles.actualEstimate}>0m</div>
+                                            </div>}
+
+                                          <img src={item.priorityUrl} name="priority url" className={styles.priorityImg} />
+                                          {Object.keys(item.assignee).length === 0 ? <div className={styles.blankDiv}></div> :
+                                            <Tooltip content={item.assignee.displayName}>
+                                              {(tooltipProps) => (
+                                                <img src={item.assignee.assigneeUrl} name="user url" {...tooltipProps} />
+                                              )}
+                                            </Tooltip>}
+                                        </div>
+
                                       </div>
-                                      <div className={isInputOpen === item.id ? styles.userBoxActive : styles.userBox}>
-                                        {isInputOpen === item.id ?
-                                          <input
-                                            id={inputId}
-                                            type="text"
-                                            className={styles.inputBox}
-                                            value={values[item.id.toString() + '-' + state] || ""} // Get the value from the state
-                                            onChange={(e) => handleChange(e, item.id)} // Pass the card id to handleChange
-                                            onBlur={(e) => handleBlur(e, item.id)} // Pass the card id to handleBlur
-                                          /> :
-
-                                          <div id={item.id} className={styles.partitionBox} >
-                                            <div id="original" className={styles.originalEstimate} onClick={(e) => handleClick(e, item.id)} title='Original Estimate'>{values[item.id.toString() + '-original'] || "0m"}</div>
-                                            <div id="actual" title='Actual Estimate' className={(item.status === "In Progress" || item.status === "QA") ? styles.InProgress : item.status === "Done" ? styles.Done : styles.actualEstimate}>0m</div>
-                                          </div>}
-
-                                        <img src={item.priorityUrl} name="priority url" className={styles.priorityImg} />
-                                        {Object.keys(item.assignee).length === 0 ? <div className={styles.blankDiv}></div> :
-                                          <Tooltip content={item.assignee.displayName}>
-                                            {(tooltipProps) => (
-                                              <img src={item.assignee.assigneeUrl} name="user url" {...tooltipProps}/>
-                                            )}
-                                          </Tooltip>}
-                                      </div>
-
-                                    </div>
-                                  </div>
+                                    </div></Link>
                                 );
                               }}
                             </Draggable>
