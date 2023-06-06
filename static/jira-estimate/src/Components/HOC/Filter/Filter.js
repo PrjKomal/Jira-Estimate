@@ -10,7 +10,7 @@ import searchIcon from '../../../assests/images/Icon ionic-ios-search.svg'
 
 
 const Filter = (props) => {
-  const { setProject, selectedUser, setSelectedUser, projectList, userList } = props
+  const { setProject, selectedUser, setSelectedUser,  userList, input, setInput } = props
   const [showItems, setShowItem] = useState(false)
   const [selectedItem, setSelectedItem] = useState();
 
@@ -67,6 +67,10 @@ const Filter = (props) => {
     } else {
       setSelectedUser([...selectedUser, id])
     }
+  }
+
+  const handleInputChange = (e)=>{
+    setInput(e.target.value)
   }
 
   return (
@@ -142,6 +146,8 @@ const Filter = (props) => {
       <div className={styles.search}>
         <input
           type="text"
+          value={input}
+          onChange={handleInputChange}
         />
         <div>
           <img src={searchIcon} alt="search icon" />
