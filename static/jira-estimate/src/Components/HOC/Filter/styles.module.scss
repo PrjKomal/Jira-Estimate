@@ -1,10 +1,14 @@
 .filterContainer {
-    width: 520px;
+    width: 1605px;
     display: flex;
     justify-content: space-between;
 
 }
-
+.filterSelect{
+    width: 520px;
+    display: flex;
+    justify-content: space-between;
+}
 
 .select_box__container {
     width: 100%;
@@ -243,4 +247,31 @@
 
 .userMain{
     width: 250px;
+}
+
+
+.search {
+    width: 122px;
+    height: 35px;
+    background: #f5f6f8 0 0 no-repeat padding-box;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: #636363;
+
+    input {
+        border: 0;
+        outline: none;
+        width: 70px;
+        height: 24px;
+        font-family: 'Roboto';
+        font-size: 20px;
+        background: #f5f6f8 0 0 no-repeat padding-box;
+    }
+    div{
+        img{
+            width: 17px;
+        }
+    }
 }

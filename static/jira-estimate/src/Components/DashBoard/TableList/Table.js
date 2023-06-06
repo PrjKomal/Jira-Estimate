@@ -176,13 +176,11 @@ const Table = (props) => {
     setIsInputOpen("");
   };
 
-  const handleOpenIssue = (e, project_key, key) => {
-    if (isInputOpen) {
-      console.log(isInputOpen)
+  const handleOpenIssue = (e, project_key, key, inputId) => {
+    if (e.target.id === "original" || e.target.id === inputId) {
       e.preventDefault(); // Prevent the default behavior of the click event
       return;
     }
-    console.log(project_key, key)
     router.open(`https://first-forge-app.atlassian.net/jira/software/projects/${project_key}/boards/1?selectedIssue=${key}`)
   }
   return (
@@ -223,6 +221,7 @@ const Table = (props) => {
                                 return (
 
                                   <div
+                                    id={item.key}
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
@@ -240,7 +239,7 @@ const Table = (props) => {
                                       position: "relative",
                                       ...provided.draggableProps.style
                                     }}
-                                    onClick={(e) => handleOpenIssue(e, item.project.project_key, item.key)}
+                                    onClick={(e) => handleOpenIssue(e, item.project.project_key, item.key, inputId)}
                                   >
                                     <div className={styles.taskName}>{item.summary}</div>
                                     {item.description ? <div className={styles.taskDescription}>{item.description}</div> : <div className={styles.taskDescriptionBlank}></div>}
