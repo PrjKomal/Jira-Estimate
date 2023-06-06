@@ -6,11 +6,12 @@ import { useOnOutsideClick } from '../useOnOutsideClick'
 import { invoke } from '@forge/bridge';
 import AvatarGroup from '@atlaskit/avatar-group';
 import Tooltip from '@atlaskit/tooltip';
-import searchIcon from '../../../assests/images/Icon ionic-ios-search.svg'
+import searchIcon from '../../../assests/images/search.svg'
+import closeIcon from '../../../assests/images/close.svg'
 
 
 const Filter = (props) => {
-  const { setProject, selectedUser, setSelectedUser,  userList, input, setInput } = props
+  const { setProject, selectedUser, setSelectedUser, userList, input, setInput } = props
   const [showItems, setShowItem] = useState(false)
   const [selectedItem, setSelectedItem] = useState();
 
@@ -69,8 +70,12 @@ const Filter = (props) => {
     }
   }
 
-  const handleInputChange = (e)=>{
+  const handleInputChange = (e) => {
     setInput(e.target.value)
+  }
+
+  const handleCancel = () => {
+    setInput("")
   }
 
   return (
@@ -150,7 +155,8 @@ const Filter = (props) => {
           onChange={handleInputChange}
         />
         <div>
-          <img src={searchIcon} alt="search icon" />
+          {input.length > 0 ? <img src={closeIcon} alt="close icon" onClick={handleCancel} /> :
+            <img src={searchIcon} alt="search icon" />}
         </div>
 
 
