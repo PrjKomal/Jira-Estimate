@@ -109,9 +109,10 @@ resolver.define('getAllIssues', async (req) => {
 resolver.define('updateIssue', async (req) => {
   try {
     const { date, issueId } = req.payload;
+    console.log("issueId", issueId, typeof(issueId))
     const response = await api
       .asApp()
-      .requestJira(route`/rest/api/3/issue/${issueId}`, {
+      .requestJira(route`/rest/api/2/issue/${issueId}`, {
         method: 'PUT',
         headers: {
           Accept: 'application/json',
@@ -123,6 +124,31 @@ resolver.define('updateIssue', async (req) => {
           },
         }),
       });
+    console.log(response.status);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+resolver.define('updateIssueTime', async (req) => {
+  try {
+    const { totalTime, id } = req.payload;
+    console.log("id", id, typeof(id))
+    const response = await api
+      .asApp()
+      .requestJira(route`/rest/api/2/issue/${id}`, {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fields: {
+            aggregatetimeoriginalestimate: +totalTime
+          },
+        }),
+      });
+    console.log("response",response);
     console.log(response.status);
   } catch (err) {
     console.log(err);

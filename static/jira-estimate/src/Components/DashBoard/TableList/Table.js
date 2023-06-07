@@ -15,6 +15,14 @@ const Table = (props) => {
 
   const [columnName, setColumnName] = useState("")
   const [issueId, setIssueId] = useState("")
+  const [values, setValues] = useState({}); // Updated to store values for each card
+
+  useEffect(() => {
+    allIssues.map((item) => setValues((prevValues) => ({
+      ...prevValues,
+      [item.id.toString()]: item.originalTime === null ? "0m" : getTime(item.originalTime), // Store the value for the specific card id
+    })))
+  }, [allIssues])
 
   useEffect(() => {
     (async () => {
@@ -150,9 +158,10 @@ const Table = (props) => {
   };
   const [state, setState] = useState("")
   const [isInputOpen, setIsInputOpen] = useState("");
-  const [values, setValues] = useState({}); // Updated to store values for each card
 
-  const handleClick = (e, id) => {
+
+  const handleClick = (e, id,) => {
+    const inputId = id.toString()
     const parentId = e.target.parentElement.id;
     const ownId = e.target.id;
     if (parentId === id) {
@@ -160,9 +169,10 @@ const Table = (props) => {
       setState(ownId)
     }
   };
+  console.log("values", values)
 
   const handleChange = (e, id) => {
-    const inputId = id.toString() + "-" + state
+    const inputId = id.toString()
 
     const value = e.target.value;
 
@@ -172,7 +182,22 @@ const Table = (props) => {
     }));
   };
 
-  const handleBlur = (e, id) => {
+  const handleBlur = async (e, id) => {
+    const time = values[id]
+    let totalTime = 0
+    if (time.includes('h') && time.includes('m')) {
+      const split_time = time.split(' ')
+      const hour = split_time[0].split('h')[0]
+      const minut = split_time[1].split('m')[0]
+      totalTime = (+hour * 3600) + (+minut * 60)
+    } else if (time.includes('h')) {
+      const hour = time.split('h')[0]
+      totalTime = (+hour * 3600)
+    } else if (time.includes('m')) {
+      const minut = time.split('m')[0]
+      totalTime = (+minut * 60)
+    }
+    await invoke('updateIssueTime', { totalTime, id })
     setIsInputOpen("");
   };
 
@@ -269,13 +294,13 @@ const Table = (props) => {
                                             id={inputId}
                                             type="text"
                                             className={styles.inputBox}
-                                            value={values[item.id.toString() + '-' + state] || ""} // Get the value from the state
+                                            value={values[item.id.toString()] || ""} // Get the value from the state
                                             onChange={(e) => handleChange(e, item.id)} // Pass the card id to handleChange
                                             onBlur={(e) => handleBlur(e, item.id)} // Pass the card id to handleBlur
                                           /> :
 
                                           <div id={item.id} className={styles.partitionBox} >
-                                            <div id="original" className={styles.originalEstimate} onClick={(e) => handleClick(e, item.id)} title='Original Estimate'>{values[item.id.toString() + '-original'] || "0m"}</div>
+                                            <div id="original" className={styles.originalEstimate} onClick={(e) => handleClick(e, item.id, item.originalTime)} title='Original Estimate'>{values[item.id.toString()]}</div>
                                             <div id="actual" title='Actual Estimate' className={(item.status === "In Progress" || item.status === "QA") ? styles.InProgress : item.status === "Done" ? styles.Done : styles.actualEstimate}>{item.actualTime === null ? "0m" : getTime(item.actualTime)}</div>
                                           </div>}
 
