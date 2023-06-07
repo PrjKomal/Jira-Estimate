@@ -93,7 +93,9 @@ resolver.define('getAllIssues', async (req) => {
           project_key: item.fields.project.key,
         },
         priorityUrl: item.fields.priority.iconUrl,
-        status: item.fields.status.name
+        status: item.fields.status.name,
+        actualTime: item.fields.timespent,
+        originalTime: item.fields.aggregatetimeoriginalestimate
       }
     })
 
