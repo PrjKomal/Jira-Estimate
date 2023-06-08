@@ -31,20 +31,26 @@
     font-weight: 500;
 }
 
-.taskDescription {
+.epicBox {
     color: #000000;
     font-size: 13px;
     margin-top: 15px;
-    margin-bottom: 30px;
-    overflow: hidden;
+    margin-bottom: 35px;
+
+    .epicName {
+        color: #403294;
+        background-color: #EAE6FF;
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: top;
+        white-space: nowrap;
+        box-sizing: border-box;
+        max-width: 100%;
+        padding: 0px 4px;
+    }
 }
 
-.taskDescriptionBlank {
-    color: #000000;
-    font-size: 13px;
-    margin: 15px 0;
-    height: 28px;
-}
 
 .taskDetails {
     display: flex;

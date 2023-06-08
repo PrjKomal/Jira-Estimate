@@ -265,7 +265,7 @@ const Table = (props) => {
                                       padding: 8,
                                       margin: "0 0 8px 0",
                                       width: "225px",
-                                      minHeight: "136px",
+                                      minHeight: "100px",
                                       maxHeight: "auto",
                                       backgroundColor: "#FFFFFF",
                                       boxShadow: " 0px 2px 2px #00000029",
@@ -277,14 +277,15 @@ const Table = (props) => {
                                     onClick={(e) => handleOpenIssue(e, item.project.project_key, item.key, inputId)}
                                   >
                                     <div className={styles.taskName}>{item.summary}</div>
-                                    {item.description ? <div className={styles.taskDescription}>{item.description}</div> : <div className={styles.taskDescriptionBlank}></div>}
+                                    {item.epicName && <div className={styles.epicBox}>
+                                      <span className={styles.epicName}>{item.epicName}</span></div>}
                                     <div className={styles.taskDetails}>
                                       <div className={styles.imgWithProjectKey}>
                                         <Avatar
                                           size="xsmall"
                                           appearance="square"
-                                          src={item.iconUrl}
-                                          name="Nucleus"
+                                          src={item.issuetype.iconUrl}
+                                          name={item.issuetype.name}
                                         />
                                         <div className={styles.key}>{item.key}</div>
                                       </div>

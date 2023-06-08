@@ -79,7 +79,11 @@ resolver.define('getAllIssues', async (req) => {
         id: item.id,
         key: item.key,
         summary: item.fields.summary,
-        iconUrl: item.fields.issuetype.iconUrl,
+        issuetype: {
+          iconUrl: item.fields.issuetype.iconUrl,
+          name: item.fields.issuetype.name
+        },
+        epicName: item.fields.parent === undefined ? "" : item.fields.parent.fields.summary,
         description: item.fields.description,
         assignee: item.fields.assignee == null ? {} : {
           accountId: item.fields.assignee.accountId,
