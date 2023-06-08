@@ -109,7 +109,7 @@ resolver.define('getAllIssues', async (req) => {
 resolver.define('updateIssue', async (req) => {
   try {
     const { date, issueId } = req.payload;
-    console.log("issueId", issueId, typeof(issueId))
+    console.log("issueId", issueId, typeof (issueId))
     const response = await api
       .asApp()
       .requestJira(route`/rest/api/2/issue/${issueId}`, {
@@ -132,8 +132,8 @@ resolver.define('updateIssue', async (req) => {
 
 resolver.define('updateIssueTime', async (req) => {
   try {
-    const { totalTime, id } = req.payload;
-    console.log("id", id, typeof(id))
+    const { time, id } = req.payload;
+    console.log("id", id, typeof (id))
     const response = await api
       .asApp()
       .requestJira(route`/rest/api/2/issue/${id}`, {
@@ -144,11 +144,13 @@ resolver.define('updateIssueTime', async (req) => {
         },
         body: JSON.stringify({
           fields: {
-            aggregatetimeoriginalestimate: +totalTime
+            timetracking: {
+              originalEstimate: time
+            }
           },
         }),
       });
-    console.log("response",response);
+    console.log("response", response);
     console.log(response.status);
   } catch (err) {
     console.log(err);

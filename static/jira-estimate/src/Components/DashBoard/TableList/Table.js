@@ -197,7 +197,7 @@ const Table = (props) => {
       const minut = time.split('m')[0]
       totalTime = (+minut * 60)
     }
-    await invoke('updateIssueTime', { totalTime, id })
+    await invoke('updateIssueTime', { time, id })
     setIsInputOpen("");
   };
 
@@ -211,7 +211,7 @@ const Table = (props) => {
 
   const getTime = (time) => {
     const data = time / 60;
-    if (data > 60) {
+    if (data >= 60) {
       const time = data / 60;
       return time.toString() + "h";
     } else {
