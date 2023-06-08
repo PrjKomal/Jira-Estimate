@@ -40,7 +40,7 @@ const Filter = (props) => {
     setShowItem(!showItems)
   }
   const handelDropDownType = () => {
-    setShowType(!showItems)
+    setShowType(!showType)
   }
   const handleProject = (project_name) => {
     setSelectedItem(project_name)
@@ -50,8 +50,12 @@ const Filter = (props) => {
   }
 
   const dropDownRef = useRef();
+  const dropDownRefType = useRef();
   useOnOutsideClick(dropDownRef, () => {
     if (showItems) setShowItem(false);
+  });
+  useOnOutsideClick(dropDownRefType, () => {
+    if (showType) setShowType(false);
   });
 
   const topCount = 4
@@ -169,7 +173,7 @@ const Filter = (props) => {
 
         <div className={showItems ? styles.select_box__box_active : styles.select_box__box}>
           <div className={styles.select_box__container}>
-            <div className={styles.select_box__selected_item} ref={dropDownRef} onClick={handelDropDownType}>
+            <div className={styles.select_box__selected_item} ref={dropDownRefType} onClick={handelDropDownType}>
               Type {selectedType.length >0 && <span className={styles.count}>{selectedType.length}</span>}
             </div>
             <div className={styles.select_box__arrow} onClick={handelDropDownType}>
@@ -181,8 +185,8 @@ const Filter = (props) => {
                 {typeList.map((type) => {
                   return (
                     <label className={styles.type} htmlFor={type.name} key={type.id}>
-                      <input type='checkbox' id={type.name} onChange={(e) => handleOnchangeType(e, type.name)} />
-                      <span htmlFor={type.name}>{type.name}</span>
+                      <input type='checkbox' id={type.name} onChange={(e) => handleOnchangeType(e, type.name)} checked={selectedType.indexOf(type.name) >= 0}/>
+                      <span id={type.name}>{type.name}</span>
                     </label>
                   )
 
