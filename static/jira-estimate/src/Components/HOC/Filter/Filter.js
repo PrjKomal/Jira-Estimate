@@ -11,11 +11,18 @@ import closeIcon from '../../../assests/images/close.svg'
 
 
 const Filter = (props) => {
-  const { setProject, selectedUser, setSelectedUser, userList, input, setInput } = props
+  const { setProject, selectedUser, setSelectedUser, userList, input, setInput, selectedType, setSelectedType } = props
   const [showItems, setShowItem] = useState(false)
+  const [showType, setShowType] = useState(false)
   const [selectedItem, setSelectedItem] = useState();
 
   const [projectsList, setProjects] = useState([])
+
+  const typeList = [
+    { id: 1, name: "Task" },
+    { id: 2, name: "Bug" },
+    { id: 3, name: "Story" },
+  ]
 
   useEffect(() => {
     (async () => {
@@ -31,6 +38,9 @@ const Filter = (props) => {
 
   const handelDropDown = () => {
     setShowItem(!showItems)
+  }
+  const handelDropDownType = () => {
+    setShowType(!showItems)
   }
   const handleProject = (project_name) => {
     setSelectedItem(project_name)
@@ -51,7 +61,7 @@ const Filter = (props) => {
     setIsOpen(!isOpen)
   }
 
-  // const [selectedUser, setSelectedUser] = useState([])/
+
   const [check, setCheck] = useState(false)
   const handleOnchange = (e, id) => {
     setCheck(e.target.checked)
@@ -77,6 +87,15 @@ const Filter = (props) => {
   const handleCancel = () => {
     setInput("")
   }
+
+  const handleOnchangeType = (e, id) => {
+    if (e.target.checked) {
+      setSelectedType([...selectedType, id])
+    } else if (!e.target.checked) {
+      setSelectedType(selectedType.filter(e => e != id))
+    }
+  }
+  console.log("selectedType", selectedType)
 
   return (
     <div className={styles.filterContainer}>
@@ -146,6 +165,31 @@ const Filter = (props) => {
             </div>
           </div>}
 
+        </div>
+
+        <div className={showItems ? styles.select_box__box_active : styles.select_box__box}>
+          <div className={styles.select_box__container}>
+            <div className={styles.select_box__selected_item} ref={dropDownRef} onClick={handelDropDownType}>
+              Type {selectedType.length >0 && <span className={styles.count}>{selectedType.length}</span>}
+            </div>
+            <div className={styles.select_box__arrow} onClick={handelDropDownType}>
+              {showType ? <img src={dropdownUpIcon} alt="" /> : <img src={dropdownDownpIcon} alt="" />}
+            </div>
+
+            {showType && <div className={styles.typeBox}>
+              <div >
+                {typeList.map((type) => {
+                  return (
+                    <label className={styles.type} htmlFor={type.name} key={type.id}>
+                      <input type='checkbox' id={type.name} onChange={(e) => handleOnchangeType(e, type.name)} />
+                      <span htmlFor={type.name}>{type.name}</span>
+                    </label>
+                  )
+
+                })}
+              </div>
+            </div>}
+          </div>
         </div>
       </div>
       <div className={styles.search}>

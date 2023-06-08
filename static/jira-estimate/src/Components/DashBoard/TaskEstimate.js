@@ -10,6 +10,7 @@ const TaskEstimate = () => {
     const [userList, setUserList] = useState([])
     const [allIssues, setAllIssues] = useState([])
     const [apiData, setApiData] = useState([])
+    const [selectedType, setSelectedType] = useState([])
 
     const [input, setInput] = useState("")
 
@@ -54,7 +55,7 @@ const TaskEstimate = () => {
                 <span className={styles.anotherHeading}>Task Estimates</span>
             </div>
             <div className={styles.mainContainer}>
-                <Filter setProject={setProject} setSelectedUser={setSelectedUser} selectedUser={selectedUser} userList={userList} input={input} setInput={setInput} />
+                <Filter setProject={setProject} setSelectedUser={setSelectedUser} selectedUser={selectedUser} userList={userList} input={input} setInput={setInput} selectedType={selectedType} setSelectedType={setSelectedType}/>
                 <Table project={project} selectedUser={selectedUser} allIssues={allIssues} />
             </div>
         </div>
