@@ -192,8 +192,8 @@ const ResourcesPage = () => {
 
         if (totalTime) {
             return {
-                hours: Math.floor(totalTime / 60),
-                minutes: totalTime % 60
+                hours: Math.floor(totalTime / 3600),
+                minutes: (totalTime % 3600) / 60
             };
         } else {
             return null;
