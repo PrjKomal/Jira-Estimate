@@ -246,7 +246,7 @@ const ResourcesPage = () => {
                         return (<div className={styles.cardBox2} key={assignee.accountId}>
                             {/* Display total time for the assignee */}
                             <div className={styles.time}>
-                                {`${assigneeTotals[name].hours}h ${assigneeTotals[name].minutes}m`}
+                                {assigneeTotals[name].hours == 0 && assigneeTotals[name].minutes == 0 ? "" : `${assigneeTotals[name].hours}h ${assigneeTotals[name].minutes}m`}
                             </div>
 
                         </div>)

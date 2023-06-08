@@ -186,9 +186,7 @@ const Filter = (props) => {
                   return (
                     <label className={styles.type} htmlFor={type.name} key={type.id}>
                       <input type='checkbox' id={type.name} onChange={(e) => handleOnchangeType(e, type.name)} checked={selectedType.indexOf(type.name) >= 0} />
-                      <Avatar
-                        size="xsmall"
-                        appearance="square" src={type.url} htmlFor={type.name} />
+                      <img src={type.url} htmlFor={type.name} />
                       <span id={type.name}>{type.name}</span>
                     </label>
                   )
