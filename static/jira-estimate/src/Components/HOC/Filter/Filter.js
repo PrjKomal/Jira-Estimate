@@ -4,7 +4,7 @@ import dropdownDownpIcon from '../../../assests/images/Icon feather-chevron-down
 import dropdownUpIcon from '../../../assests/images/Icon feather-chevron-down.svg'
 import { useOnOutsideClick } from '../useOnOutsideClick'
 import { invoke } from '@forge/bridge';
-import AvatarGroup from '@atlaskit/avatar-group';
+import Avatar from '@atlaskit/avatar';
 import Tooltip from '@atlaskit/tooltip';
 import searchIcon from '../../../assests/images/search.svg'
 import closeIcon from '../../../assests/images/close.svg'
@@ -19,9 +19,9 @@ const Filter = (props) => {
   const [projectsList, setProjects] = useState([])
 
   const typeList = [
-    { id: 1, name: "Task" },
-    { id: 2, name: "Bug" },
-    { id: 3, name: "Story" },
+    { id: 1, name: "Task", url: 'https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium' },
+    { id: 2, name: "Bug", url: 'https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium' },
+    { id: 3, name: "Story", url: 'https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium' },
   ]
 
   useEffect(() => {
@@ -174,7 +174,7 @@ const Filter = (props) => {
         <div className={showItems ? styles.select_box__box_active : styles.select_box__box}>
           <div className={styles.select_box__container}>
             <div className={styles.select_box__selected_item} ref={dropDownRefType} onClick={handelDropDownType}>
-              Type {selectedType.length >0 && <span className={styles.count}>{selectedType.length}</span>}
+              Type {selectedType.length > 0 && <span className={styles.count}>{selectedType.length}</span>}
             </div>
             <div className={styles.select_box__arrow} onClick={handelDropDownType}>
               {showType ? <img src={dropdownUpIcon} alt="" /> : <img src={dropdownDownpIcon} alt="" />}
@@ -185,7 +185,10 @@ const Filter = (props) => {
                 {typeList.map((type) => {
                   return (
                     <label className={styles.type} htmlFor={type.name} key={type.id}>
-                      <input type='checkbox' id={type.name} onChange={(e) => handleOnchangeType(e, type.name)} checked={selectedType.indexOf(type.name) >= 0}/>
+                      <input type='checkbox' id={type.name} onChange={(e) => handleOnchangeType(e, type.name)} checked={selectedType.indexOf(type.name) >= 0} />
+                      <Avatar
+                        size="xsmall"
+                        appearance="square" src={type.url} htmlFor={type.name} />
                       <span id={type.name}>{type.name}</span>
                     </label>
                   )
