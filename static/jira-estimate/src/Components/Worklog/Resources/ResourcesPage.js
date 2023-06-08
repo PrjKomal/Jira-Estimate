@@ -160,8 +160,8 @@ const ResourcesPage = () => {
                 return total + time;
             }, 0);
 
-        const hours = Math.floor(totalTime / 60);
-        const minutes = totalTime % 60;
+        const hours = Math.floor(totalTime / 3600);
+        const minutes = (totalTime % 3600) / 60;
 
         totals[assignee.displayName] = {
             hours,
