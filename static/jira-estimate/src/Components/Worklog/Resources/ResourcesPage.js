@@ -171,7 +171,6 @@ const ResourcesPage = () => {
     }, {});
 
 
-    console.log("assigneeTotals", assigneeTotals)
     // Retrieve time spent on a specific day for an assignee
     const getDayTime = (day, assignee) => {
 

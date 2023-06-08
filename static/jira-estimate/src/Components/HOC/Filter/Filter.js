@@ -99,7 +99,7 @@ const Filter = (props) => {
       setSelectedType(selectedType.filter(e => e != id))
     }
   }
-  console.log("selectedType", selectedType)
+
 
   return (
     <div className={styles.filterContainer}>

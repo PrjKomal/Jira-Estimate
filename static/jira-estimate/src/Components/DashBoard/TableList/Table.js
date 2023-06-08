@@ -169,7 +169,7 @@ const Table = (props) => {
       setState(ownId)
     }
   };
-  console.log("values", values)
+
 
   const handleChange = (e, id) => {
     const inputId = id.toString()
