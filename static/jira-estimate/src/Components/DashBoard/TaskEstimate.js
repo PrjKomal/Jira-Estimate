@@ -27,25 +27,31 @@ const TaskEstimate = () => {
 
 
     useEffect(() => {
-        //get user list
-        const userList = apiData.map(item => item.assignee)
-        // remove duplicate user from array
-        const uniqueUser = [...new Map(userList.map((item) => [item["accountId"], item])).values()]
-        setUserList(uniqueUser.filter(item => Object.keys(item).length))
-        if (selectedUser.length == 0 && input.length == 0) {
-            const filteredByInput = apiData.filter((item) => item.summary.toLowerCase().includes(input.toLowerCase()))
-            setAllIssues(filteredByInput)
-        } else if (selectedUser.length > 0 && input.length > 0) {
-            const filteredData = apiData.filter(item => selectedUser.includes(item.assignee.accountId) && item.summary.toLowerCase().includes(input.toLowerCase()))
-            setAllIssues(filteredData)
-        } else if (selectedUser.length > 0) {
-            const filteredData = apiData.filter(item => selectedUser.includes(item.assignee.accountId))
-            setAllIssues(filteredData)
-        } else if (input) {
-            const filteredData = apiData.filter(item => item.summary.toLowerCase().includes(input.toLowerCase()))
-            setAllIssues(filteredData)
+        // Get user list
+        const userList = apiData.map(item => item.assignee);
+        // Remove duplicate users from the array
+        const uniqueUser = [...new Map(userList.map(item => [item["accountId"], item])).values()];
+        setUserList(uniqueUser.filter(item => Object.keys(item).length));
+
+        // Filter data based on selected user, selected type, and input
+        let filteredData = apiData;
+
+        if (selectedUser.length > 0) {
+            filteredData = filteredData.filter(item => selectedUser.includes(item.assignee.accountId));
         }
-    }, [apiData, selectedUser, input])
+
+        if (selectedType.length > 0) {
+            filteredData = filteredData.filter(item => selectedType.includes(item.issuetype.name));
+        }
+
+        if (input) {
+            const inputLowerCase = input.toLowerCase();
+            filteredData = filteredData.filter(item => item.summary.toLowerCase().includes(inputLowerCase));
+        }
+
+        setAllIssues(filteredData);
+    }, [apiData, selectedUser, selectedType, input]);
+
     return (
         <div className={styles.HomePage}>
             <div className={styles.mainHeading}>
@@ -55,7 +61,7 @@ const TaskEstimate = () => {
                 <span className={styles.anotherHeading}>Task Estimates</span>
             </div>
             <div className={styles.mainContainer}>
-                <Filter setProject={setProject} setSelectedUser={setSelectedUser} selectedUser={selectedUser} userList={userList} input={input} setInput={setInput} selectedType={selectedType} setSelectedType={setSelectedType}/>
+                <Filter setProject={setProject} setSelectedUser={setSelectedUser} selectedUser={selectedUser} userList={userList} input={input} setInput={setInput} selectedType={selectedType} setSelectedType={setSelectedType} />
                 <Table project={project} selectedUser={selectedUser} allIssues={allIssues} />
             </div>
         </div>
