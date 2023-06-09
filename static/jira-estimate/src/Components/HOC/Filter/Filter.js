@@ -99,7 +99,7 @@ const Filter = (props) => {
       setSelectedType(selectedType.filter(e => e != id))
     }
   }
-
+  console.log(selectedType)
 
   return (
     <div className={styles.filterContainer}>
@@ -171,7 +171,7 @@ const Filter = (props) => {
 
         </div>
 
-        <div className={showItems ? styles.select_box__box_active : styles.select_box__box}>
+        <div className={showType ? styles.select_box__box_active : styles.select_box__box}>
           <div className={styles.select_box__container}>
             <div className={styles.select_box__selected_item} ref={dropDownRefType} onClick={handelDropDownType}>
               Type {selectedType.length > 0 && <span className={styles.count}>{selectedType.length}</span>}
@@ -180,20 +180,26 @@ const Filter = (props) => {
               {showType ? <img src={dropdownUpIcon} alt="" /> : <img src={dropdownDownpIcon} alt="" />}
             </div>
 
-            {showType && <div className={styles.typeBox}>
-              <div >
-                {typeList.map((type) => {
-                  return (
-                    <label className={styles.type} htmlFor={type.name} key={type.id}>
-                      <input type='checkbox' id={type.name} onChange={(e) => handleOnchangeType(e, type.name)} checked={selectedType.indexOf(type.name) >= 0} />
-                      <img src={type.url} htmlFor={type.name} />
-                      <span id={type.name}>{type.name}</span>
-                    </label>
-                  )
+            {showType && (
+              <div className={styles.typeBox} ref={dropDownRefType}>
+                <div >
+                  {typeList.map((type) => {
+                    return (
+                      <label className={styles.type} htmlFor={type.name} key={type.id}>
+                        <input
+                          type="checkbox"
+                          id={type.name}
+                          onChange={(e) => handleOnchangeType(e, type.name)}
+                          checked={selectedType.includes(type.name)}
+                        />
+                        <img src={type.url} alt={type.name} />
+                        <span>{type.name}</span>
+                      </label>
+                    )
 
-                })}
-              </div>
-            </div>}
+                  })}
+                </div>
+              </div>)}
           </div>
         </div>
       </div>
