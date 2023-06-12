@@ -184,19 +184,6 @@ const Table = (props) => {
 
   const handleBlur = async (e, id) => {
     const time = values[id]
-    let totalTime = 0
-    if (time.includes('h') && time.includes('m')) {
-      const split_time = time.split(' ')
-      const hour = split_time[0].split('h')[0]
-      const minut = split_time[1].split('m')[0]
-      totalTime = (+hour * 3600) + (+minut * 60)
-    } else if (time.includes('h')) {
-      const hour = time.split('h')[0]
-      totalTime = (+hour * 3600)
-    } else if (time.includes('m')) {
-      const minut = time.split('m')[0]
-      totalTime = (+minut * 60)
-    }
     await invoke('updateIssueTime', { time, id })
     setIsInputOpen("");
   };
