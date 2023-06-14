@@ -119,142 +119,173 @@ const ResourcesPage = () => {
         })();
     }, []);
 
-    // Get unique weekdays
-    const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
-    // const [columns, setColumns] = useState(columnsFromBackend);
 
     const [userId, setUserId] = useState("")
 
     const handleCaretDownIcon = (id) => {
         setUserId(id)
     }
-    const handleCaretUPIcon = () => {
+    const handleCaretUpIcon = () => {
         setUserId("")
     }
-    const [data, setData] = useState()
-    const assignees = Array.from(
-        new Set(allIssues.map((issue) => issue.assignee.displayName))
-    ).
-        map((displayName) => {
-            const issue = allIssues.find(
-                (issue) =>
-                    issue.assignee.displayName === displayName &&
-                    Object.keys(issue.assignee).length !== 0
-            );
-            if (issue) {
-                return {
-                    displayName: issue.assignee.displayName,
-                    assigneeUrl: issue.assignee.assigneeUrl,
-                    accountId: issue.assignee.accountId,
-                };
-            }
-        }).filter((item) => item !== undefined)
 
-    // Calculate total time for each assignee
-    const assigneeTotals = assignees.reduce((totals, assignee) => {
-        const totalTime = allIssues
-            .filter((issue) => issue.assignee.displayName === assignee.displayName && issue.actualTime)
-            .reduce((total, issue) => {
-                const time = issue.actualTime ? parseInt(issue.actualTime) : 0;
-                return total + time;
-            }, 0);
+    // Get unique weekdays
+    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
-        const hours = Math.floor(totalTime / 3600);
-        const minutes = (totalTime % 3600) / 60;
+    const transformedData = [];
 
-        totals[assignee.displayName] = {
-            hours,
-            minutes
-        };
-        return totals;
-    }, {});
+    allIssues.forEach((issue) => {
+        const { startDate, actualTime, assignee } = issue;
+        const assigneeKey = JSON.stringify(assignee);
 
-
-    // Retrieve time spent on a specific day for an assignee
-    const getDayTime = (day, assignee) => {
-
-        const totalTime = allIssues
-            .filter(
-                (issue) =>
-                    issue.assignee.displayName === assignee.displayName &&
-                    issue.startDate &&
-                    new Date(issue.startDate).toLocaleDateString('en-US', { weekday: 'long' }) === day &&
-                    issue.actualTime
-
-            )
-            .reduce((total, issue) => {
-                const time = parseInt(issue.actualTime);
-                return total + time;
-            }, 0);
-
-
-        if (totalTime) {
-            return {
-                hours: Math.floor(totalTime / 3600),
-                minutes: (totalTime % 3600) / 60
+        let assigneeEntry = transformedData.find((entry) => entry.assignee === assigneeKey);
+        if (!assigneeEntry) {
+            assigneeEntry = {
+                assignee: assigneeKey,
+                weekdays: daysOfWeek.map((day) => ({
+                    day,
+                    totalTime: 0,
+                    issues: []
+                })),
+                time: 0
             };
+            transformedData.push(assigneeEntry);
+        }
+
+        const dayOfWeek = new Date(startDate).getDay();
+        const dayIndex = dayOfWeek - 1;
+
+        if (issue.actualTime) {
+            assigneeEntry.weekdays[dayIndex].issues.push(issue);
+            assigneeEntry.weekdays[dayIndex].totalTime += actualTime || 0;
+        }
+        assigneeEntry.time += actualTime || 0;
+    });
+
+    transformedData.forEach((assigneeEntry) => {
+        assigneeEntry.assignee = JSON.parse(assigneeEntry.assignee);
+    });
+
+    const filteredData = transformedData.filter(item => Object.keys(item.assignee).length !== 0)
+    console.log(filteredData);
+
+    const getTime = (time) => {
+        if (time) {
+            const data = time / 60;
+            if (data >= 60) {
+                const time = data / 60;
+                return time.toString() + "h";
+            } else {
+                return data.toString() + "m";
+            }
         } else {
             return null;
         }
-    };
-
-
+    }
 
     return (
-        <div className={styles.AnotherPageContainer}>
-            <div className={styles.UserNameList}>
-                <div className={styles.columnName}>Name</div>
-                <div className={styles.DataBox}>
-                    {assignees.map((user) => {
+        <div className={styles.worklogContainer}>
+            <div className={styles.ColumnNames}>
+                <div className={styles.nameColumn}>
+                    <div className={styles.name}>Name</div>
+                </div>
+                <div className={styles.weekdays}>
+                    {daysOfWeek.map((day, index) => {
                         return (
-                            <div key={user.accountId} className={styles.userBox}>
-                                {userId == user.accountId ? <img src={downArrowIcon} className={styles.arrowDown} onClick={handleCaretUPIcon} /> : <img src={rightArrowIcon} className={styles.arrow} onClick={(e) => handleCaretDownIcon(user.accountId)} />}
-                                <img src={user.assigneeUrl} className={styles.userImg} />
-                            </div>)
+                            <div className={styles.Columns} key={index}>
+                                <div className={styles.columnName}>{day}</div>
+                            </div>
+                        )
                     })}
                 </div>
-
+                <div className={styles.totalColumn}>
+                    <div className={styles.name}>Total</div>
+                </div>
             </div>
-            {weekdays.map((day, index) => {
-                return (
-                    <div className={styles.Columns} key={index}>
-                        <div className={styles.columnName}>{day}</div>
-                        <div className={styles.DataBox}>
-                            {assignees.map((assignee, index) => {
-                                return (
-                                    <>
-                                        <div className={styles.cardBox} key={`${assignee.accountId}-${day}`}>
-                                            <div className={styles.time}>
-
-                                                {getDayTime(day, assignee) && `${getDayTime(day, assignee).hours}h ${getDayTime(day, assignee).minutes}m`}
+            <div className={styles.mainContainer}>
+                {filteredData.map((item) => {
+                    const id = item.assignee.accountId
+                    return (
+                        <div className={styles.tablebox}>
+                            <div className={styles.userLists}>
+                                <div key={item.assignee.accountId}>
+                                    <div className={styles.userBox}>
+                                        <div className={styles.userDetails}>
+                                            <div className={styles.userName}>
+                                                {userId == item.assignee.accountId ? <img src={downArrowIcon} className={styles.arrowDown} onClick={handleCaretUpIcon} /> : <img src={rightArrowIcon} className={styles.arrow} onClick={(e) => handleCaretDownIcon(item.assignee.accountId)} />}
+                                                <img src={item.assignee.assigneeUrl} className={styles.userImg} />
                                             </div>
+
                                         </div>
 
-                                    </>
-                                )
-                            })}
-                        </div>
-                    </div>
-                )
-            })}
-            <div className={styles.TotalList}>
-                <div className={styles.columnName}>Total</div>
-                <div className={styles.DataBox}>
-                    {assignees.map((assignee) => {
-                        const name = assignee.displayName;
-                        return (<div className={styles.cardBox2} key={assignee.accountId}>
-                            {/* Display total time for the assignee */}
-                            <div className={styles.time}>
-                                {assigneeTotals[name].hours == 0 && assigneeTotals[name].minutes == 0 ? "" : `${assigneeTotals[name].hours}h ${assigneeTotals[name].minutes}m`}
+                                    </div>
+                                </div>
                             </div>
+                            <div className={styles.issueLists}>
+                                {item.weekdays.map((item) => {
+                                    return (
+                                        <div style={{ backgroundColor: '#F4F5F7', width: 255 }}>
+                                            <>
+                                                {getTime(item.totalTime) ? <div className={styles.cardBox} key={`${item.day}`}>
+                                                    <div className={styles.time}>
 
-                        </div>)
-                    })}
-                </div>
+                                                        {getTime(item.totalTime)}
+                                                    </div>
+                                                </div> : <div className={styles.cardBoxBlank} key={`${item.day}`}>
+
+                                                </div>}
+
+                                            </>
+                                            {id === userId && item.issues.map((item, index) => {
+                                                return (
+                                                    <div key={item.id} index={index}>
+                                                        <div id={item.key} className={styles.cardContainer} >
+                                                            <div className={styles.taskName}>{item.summary}</div>
+                                                            {item.epicName && <div className={styles.epicBox}>
+                                                                <span className={styles.epicName}>{item.epicName}</span></div>}
+                                                            <div className={styles.taskDetails}>
+                                                                <div className={styles.imgWithProjectKey}>
+                                                                    <img src={item.issuetype.iconUrl}
+                                                                        name={item.issuetype.name}
+                                                                    />
+                                                                    <div className={styles.key}>{item.key}</div>
+                                                                </div>
+                                                                <div className={styles.userBoxActive}>
+                                                                    <div id={item.id} className={styles.partitionBox} >
+                                                                        <div id="original" className={styles.originalEstimate} title='Original Estimate'>{getTime(item.actualTime)}</div>
+                                                                        <div id="actual" title='Actual Estimate' className={(item.status === "In Progress" || item.status === "QA") ? styles.InProgress : item.status === "Done" ? styles.Done : styles.actualEstimate}>{item.actualTime === null ? "0m" : getTime(item.actualTime)}</div>
+                                                                    </div>
+                                                                    <img src={item.priorityUrl} name="priority url" className={styles.priorityImg} />
+                                                                    {Object.keys(item.assignee).length === 0 ? <div className={styles.blankDiv}></div> :
+
+                                                                        <img src={item.assignee.assigneeUrl} name="user url" />
+                                                                    }
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                )
+                                            }
+                                            )}
+                                        </div>)
+                                })}
+                            </div>
+                            <div className={styles.totalList}>
+                                {getTime(item.time) ? <div className={styles.cardBox2}>
+                                    <div className={styles.time}>
+                                        {getTime(item.time)}
+                                    </div>
+                                </div> : ""}
+                            </div>
+                        </div>
+                    )
+                })}
             </div>
-        </div >
-
+        </div>
     )
 }
 
