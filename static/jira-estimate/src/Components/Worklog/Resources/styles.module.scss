@@ -5,10 +5,10 @@
     .ColumnNames {
         display: flex;
         justify-content: space-between;
-        width: 1805px;
+        width: 1605px;
 
         .nameColumn {
-            width: 95px;
+            width: 94px;
             background: #F4F5F7 0% 0% no-repeat padding-box;
             opacity: 1;
             height: 45px;
@@ -24,12 +24,12 @@
         }
 
         .weekdays {
-            width: 1499px;
+            width: 1375px;
             display: flex;
             justify-content: space-between;
 
             .Columns {
-                width: 255px;
+                width: 260px;
                 height: 45px;
                 background: #F4F5F7 0% 0% no-repeat padding-box;
                 opacity: 1;
@@ -64,7 +64,7 @@
     }
 
     .mainContainer {
-        width: 1805px;
+        width: 1605px;
         min-height: 770px;
 
         .tablebox {
@@ -127,7 +127,7 @@
     margin-top: 25px;
     margin-left: 6px;
     margin-bottom: 7px;
-    width: 244px;
+    width: 247px;
     // position: absolute;
 
     .time {
@@ -147,7 +147,7 @@
     margin-left: 6px;
     margin-bottom: 7px;
     opacity: 1;
-    width: 244px;
+    width: 247px;
 }
 
 .taskName {
@@ -314,7 +314,7 @@
     user-select: none;
     padding: 8px;
     margin: 0 0px 8px 8px;
-    width: 224px;
+    width: 228px;
     min-height: 100px;
     max-height: auto;
     background-color: #FFFFFF;
@@ -326,11 +326,11 @@
 
 .userLists {
     background-color: #F4F5F7;
-    width: 95px;
+    width: 94px;
 }
 
 .issueLists {
-    width: 1499px;
+    width: 1375px;
     display: flex;
     justify-content: space-between;
 }
@@ -358,4 +358,8 @@
         padding-top: 13px;
         margin: 0px 14px;
     }
+}
+.issues{
+    background-color: #F4F5F7;
+     width: 260px;
 }

@@ -225,7 +225,7 @@ const ResourcesPage = () => {
                             <div className={styles.issueLists}>
                                 {item.weekdays.map((item) => {
                                     return (
-                                        <div style={{ backgroundColor: '#F4F5F7', width: 255 }}>
+                                        <div className={styles.issues}>
                                             <>
                                                 {getTime(item.totalTime) ? <div className={styles.cardBox} key={`${item.day}`}>
                                                     <div className={styles.time}>
