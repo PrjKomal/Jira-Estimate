@@ -14,6 +14,7 @@ modules:
               icon: https://developer.atlassian.com/platform/forge/images/icons/issue-panel-icon.svg
             - title: Worklog
               route: /worklog
+              icon: https://apps-worklogs.soldevelo.com/images/worklogs_icon_project.svg
   function:
     - key: resolver
       handler: index.handler
