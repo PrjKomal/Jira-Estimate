@@ -188,12 +188,12 @@ const Table = (props) => {
     setIsInputOpen("");
   };
 
-  const handleOpenIssue = (e, project_key, key, inputId) => {
+  const handleOpenIssue = (e, key, inputId) => {
     if (e.target.id === "original" || e.target.id === inputId) {
       e.preventDefault(); // Prevent the default behavior of the click event
       return;
     }
-    router.open(`https://first-forge-app.atlassian.net/browse/${project_key}`)
+    router.open(`/browse/${key}`)
   }
 
   const getTime = (time) => {
@@ -261,7 +261,7 @@ const Table = (props) => {
                                       position: "relative",
                                       ...provided.draggableProps.style
                                     }}
-                                    onClick={(e) => handleOpenIssue(e, item.project.project_key, item.key, inputId)}
+                                    onClick={(e) => handleOpenIssue(e, item.key, inputId)}
                                   >
                                     <div className={styles.taskName}>{item.summary}</div>
                                     {item.epicName && <div className={styles.epicBox}>
