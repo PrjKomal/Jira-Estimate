@@ -192,7 +192,7 @@ const Filter = (props) => {
         <div className={showType ? styles.select_box__box_active : styles.select_box__box}>
           <div className={styles.select_box__container}>
             <div className={styles.select_box__selected_item} ref={dropDownRefType} onClick={handelDropDownType}>
-              Type {selectedType.length > 0 && <span className={styles.count}>{selectedType.length}</span>}
+              Type {selectedType.length > 0 && <div className={styles.count}>{selectedType.length}</div>}
             </div>
             <div className={styles.select_box__arrow} onClick={handelDropDownType}>
               {showType ? <img src={dropdownUpIcon} alt="" /> : <img src={dropdownDownpIcon} alt="" />}
@@ -225,7 +225,7 @@ const Filter = (props) => {
         <div className={showLabel ? styles.select_box__box_active : styles.select_box__box}>
           <div className={styles.select_box__container}>
             <div className={styles.select_box__selected_item} ref={dropDownRefLabel} onClick={handelDropDownLabel}>
-              Label {selectedLabel.length > 0 && <span className={styles.count}>{selectedLabel.length}</span>}
+              Label {selectedLabel.length > 0 && <div className={styles.count}>{selectedLabel.length}</div>}
             </div>
             <div className={styles.select_box__arrow} onClick={handelDropDownLabel}>
               {showLabel ? <img src={dropdownUpIcon} alt="" /> : <img src={dropdownDownpIcon} alt="" />}

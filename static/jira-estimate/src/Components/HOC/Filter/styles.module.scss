@@ -17,7 +17,7 @@
 }
 
 .select_box__box {
-     margin-right: 119px;
+    margin-right: 119px;
     width: 120px;
     height: 35px;
     background: #F5F6F8 0% 0% no-repeat padding-box;
@@ -35,7 +35,7 @@
 }
 
 .select_box__selected_item {
-    display: inline-block;
+    display: inline-flex;
     font-size: 16px;
     color: #757575;
     vertical-align: middle;
@@ -319,12 +319,16 @@
 }
 
 .count {
+    background-color: #0052cc;
     border-radius: 50%;
-    font-size: 12px;
     color: #fff;
-    background-color: #0052CC;
-    padding: 2px 5px;
-    margin-left: 3px;
+    font-size: 12px;
+    margin-left: 5px;
+    width: 13px;
+    height: 17px;
+    text-align: center;
+    padding: 2px 2px;
+    
 }
 
 .labelBox {
@@ -346,7 +350,7 @@
         padding: 9px;
         cursor: pointer;
 
-        
+
 
         span {
             margin-left: 10px;
