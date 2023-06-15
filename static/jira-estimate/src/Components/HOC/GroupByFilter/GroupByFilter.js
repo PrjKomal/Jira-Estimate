@@ -7,13 +7,14 @@ import { useOnOutsideClick } from '../useOnOutsideClick'
 
 
 const GroupByFilter = (props) => {
+  const { selectedItem, setSelectedItem } = props
   const [showItems, setShowItem] = useState(false)
-  const [selectedItem, setSelectedItem] = useState("")
+
 
   const GroupByList = [
-    { id: 1, name: "Project"},
-    { id: 2, name: "Assignee"},
-    { id: 3, name: "None"},
+    { id: 1, name: "Project" },
+    { id: 2, name: "Assignee" },
+    { id: 3, name: "None" },
   ]
 
 
@@ -21,7 +22,7 @@ const GroupByFilter = (props) => {
   const handelDropDown = () => {
     setShowItem(!showItems)
   }
- 
+
   const handleFilterType = (project_name) => {
     setSelectedItem(project_name)
     setShowItem(false)
@@ -32,7 +33,7 @@ const GroupByFilter = (props) => {
   useOnOutsideClick(dropDownRef, () => {
     if (showItems) setShowItem(false);
   });
- 
+
 
 
   return (

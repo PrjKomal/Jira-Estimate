@@ -95,6 +95,7 @@ resolver.define('getAllIssues', async (req) => {
         project: {
           project_id: item.fields.project.id,
           project_key: item.fields.project.key,
+          project_url: item.fields.project.avatarUrls["24x24"]
         },
         priorityUrl: item.fields.priority.iconUrl,
         status: item.fields.status.name,
