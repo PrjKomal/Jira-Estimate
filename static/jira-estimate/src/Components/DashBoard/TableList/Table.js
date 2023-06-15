@@ -126,7 +126,6 @@ const Table = (props) => {
       setHeigth(rect.height)
     }
   },[columns, issueId])
-  console.log(height)
 
   const onDragEnd = (result, columns, setColumns) => {
     if (!result.destination) return;
