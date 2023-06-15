@@ -11,9 +11,10 @@ import closeIcon from '../../../assests/images/close.svg'
 
 
 const Filter = (props) => {
-  const { setProject, selectedUser, setSelectedUser, userList, input, setInput, selectedType, setSelectedType } = props
+  const { setProject, selectedUser, setSelectedUser, userList, input, setInput, selectedType, setSelectedType, selectedLabel, setSelectedLabel } = props
   const [showItems, setShowItem] = useState(false)
   const [showType, setShowType] = useState(false)
+  const [showLabel, setShowLabel] = useState(false)
   const [selectedItem, setSelectedItem] = useState();
 
   const [projectsList, setProjects] = useState([])
@@ -22,6 +23,10 @@ const Filter = (props) => {
     { id: 1, name: "Task", url: 'https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium' },
     { id: 2, name: "Bug", url: 'https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium' },
     { id: 3, name: "Story", url: 'https://first-forge-app.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium' },
+  ]
+  const labelList = [
+    { id: 1, name: "Unassigned", },
+    { id: 2, name: "Missing Estimate", },
   ]
 
   useEffect(() => {
@@ -42,6 +47,9 @@ const Filter = (props) => {
   const handelDropDownType = () => {
     setShowType(!showType)
   }
+  const handelDropDownLabel = () => {
+    setShowLabel(!showLabel)
+  }
   const handleProject = (project_name) => {
     setSelectedItem(project_name)
     setProject(project_name)
@@ -51,11 +59,16 @@ const Filter = (props) => {
 
   const dropDownRef = useRef();
   const dropDownRefType = useRef();
+  const dropDownRefLabel = useRef();
+  
   useOnOutsideClick(dropDownRef, () => {
     if (showItems) setShowItem(false);
   });
   useOnOutsideClick(dropDownRefType, () => {
     if (showType) setShowType(false);
+  });
+  useOnOutsideClick(dropDownRefLabel, () => {
+    if (showLabel) setShowLabel(false);
   });
 
   const topCount = 4
@@ -99,7 +112,13 @@ const Filter = (props) => {
       setSelectedType(selectedType.filter(e => e != id))
     }
   }
-
+  const handleOnchangeLabel = (e, id) => {
+    if (e.target.checked) {
+      setSelectedLabel([...selectedLabel, id])
+    } else if (!e.target.checked) {
+      setSelectedLabel(selectedLabel.filter(e => e != id))
+    }
+  }
   return (
     <div className={styles.filterContainer}>
       <div className={styles.filterSelect}>
@@ -193,6 +212,38 @@ const Filter = (props) => {
                         />
                         <img src={type.url} alt={type.name} />
                         <span>{type.name}</span>
+                      </label>
+                    )
+
+                  })}
+                </div>
+              </div>)}
+          </div>
+        </div>
+
+        {/* Filter by label */}
+        <div className={showLabel ? styles.select_box__box_active : styles.select_box__box}>
+          <div className={styles.select_box__container}>
+            <div className={styles.select_box__selected_item} ref={dropDownRefLabel} onClick={handelDropDownLabel}>
+              Label {selectedLabel.length > 0 && <span className={styles.count}>{selectedLabel.length}</span>}
+            </div>
+            <div className={styles.select_box__arrow} onClick={handelDropDownLabel}>
+              {showLabel ? <img src={dropdownUpIcon} alt="" /> : <img src={dropdownDownpIcon} alt="" />}
+            </div>
+
+            {showLabel && (
+              <div className={styles.labelBox} ref={dropDownRefLabel}>
+                <div >
+                  {labelList.map((label) => {
+                    return (
+                      <label className={styles.label} htmlFor={label.name} key={label.id}>
+                        <input
+                          type="checkbox"
+                          id={label.name}
+                          onChange={(e) => handleOnchangeLabel(e, label.id)}
+                          checked={selectedLabel.includes(label.id)}
+                        />
+                        <span>{label.name}</span>
                       </label>
                     )
 

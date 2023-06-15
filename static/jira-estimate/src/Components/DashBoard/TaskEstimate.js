@@ -11,6 +11,7 @@ const TaskEstimate = () => {
     const [allIssues, setAllIssues] = useState([])
     const [apiData, setApiData] = useState([])
     const [selectedType, setSelectedType] = useState([])
+    const [selectedLabel, setSelectedLabel] = useState([])
 
     const [input, setInput] = useState("")
 
@@ -48,9 +49,23 @@ const TaskEstimate = () => {
             const inputLowerCase = input.toLowerCase();
             filteredData = filteredData.filter(item => item.summary.toLowerCase().includes(inputLowerCase));
         }
-
+        if (selectedLabel.length > 0) {
+            filteredData = filteredData.filter((item) => {
+                if (selectedLabel.includes(1) && selectedLabel.includes(2)) {
+                    console.log("1")
+                    return Object.keys(item.assignee).length === 0 && item.originalTime == null;
+                } else if (selectedLabel.includes(1)) {
+                    console.log("2")
+                    return Object.keys(item.assignee).length === 0;
+                } else if (selectedLabel.includes(2)) {
+                    console.log("3")
+                    return item.originalTime === null;
+                }
+            })
+            console.log("filteredData", filteredData)
+        }
         setAllIssues(filteredData);
-    }, [apiData, selectedUser, selectedType, input]);
+    }, [apiData, selectedUser, selectedType, input, selectedLabel]);
 
     return (
         <div className={styles.HomePage}>
@@ -61,7 +76,9 @@ const TaskEstimate = () => {
                 <span className={styles.anotherHeading}>Task Estimates</span>
             </div>
             <div className={styles.mainContainer}>
-                <Filter setProject={setProject} setSelectedUser={setSelectedUser} selectedUser={selectedUser} userList={userList} input={input} setInput={setInput} selectedType={selectedType} setSelectedType={setSelectedType} />
+                <Filter setProject={setProject} setSelectedUser={setSelectedUser} selectedUser={selectedUser} userList={userList} input={input} setInput={setInput} selectedType={selectedType}
+                    setSelectedType={setSelectedType} selectedLabel={selectedLabel} setSelectedLabel={setSelectedLabel}
+                />
                 <Table project={project} selectedUser={selectedUser} allIssues={allIssues} />
             </div>
         </div>
