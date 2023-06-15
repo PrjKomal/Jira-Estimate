@@ -52,17 +52,14 @@ const TaskEstimate = () => {
         if (selectedLabel.length > 0) {
             filteredData = filteredData.filter((item) => {
                 if (selectedLabel.includes(1) && selectedLabel.includes(2)) {
-                    console.log("1")
                     return Object.keys(item.assignee).length === 0 && item.originalTime == null;
                 } else if (selectedLabel.includes(1)) {
-                    console.log("2")
                     return Object.keys(item.assignee).length === 0;
                 } else if (selectedLabel.includes(2)) {
-                    console.log("3")
                     return item.originalTime === null;
                 }
             })
-            console.log("filteredData", filteredData)
+            
         }
         setAllIssues(filteredData);
     }, [apiData, selectedUser, selectedType, input, selectedLabel]);

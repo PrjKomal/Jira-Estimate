@@ -168,7 +168,6 @@ const ResourcesPage = () => {
     });
 
     const filteredData = transformedData.filter(item => Object.keys(item.assignee).length !== 0)
-    console.log(filteredData);
 
     const getTime = (time) => {
         if (time) {
