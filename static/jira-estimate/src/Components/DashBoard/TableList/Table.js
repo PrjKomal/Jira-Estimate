@@ -193,7 +193,7 @@ const Table = (props) => {
       e.preventDefault(); // Prevent the default behavior of the click event
       return;
     }
-    router.open(`https://first-forge-app.atlassian.net/jira/software/projects/${project_key}/boards/1?selectedIssue=${key}`)
+    router.open(`https://first-forge-app.atlassian.net/browse/${project_key}`)
   }
 
   const getTime = (time) => {
