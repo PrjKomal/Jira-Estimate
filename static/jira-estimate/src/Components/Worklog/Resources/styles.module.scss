@@ -1,6 +1,5 @@
 .worklogContainer {
-    margin-top: 60px;
-    height: 90vh;
+    margin-top: 26px;
 
     .ColumnNames {
         display: flex;
@@ -196,39 +195,17 @@
 
         .key {
             margin-left: 5px;
-            font-size: 12px;
+            font-size: 11px;
             width: fit-content;
+            font-weight: 600;
         }
 
     }
 }
 
-.userBox {
-    width: 93px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    img {
-        width: 24px;
-        height: 24px;
-        cursor: default;
-        border-radius: 50%;
-        margin-top: 1px;
-    }
-
-    .priorityImg {
-        width: 10px;
-    }
-
-    .blankDiv {
-        width: 24px;
-        height: 24px;
-    }
-}
 
 .userBoxActive {
-    width: 100px;
+    width: 122px;
     display: flex;
     align-items: center;
 
@@ -259,7 +236,7 @@
 }
 
 .partitionBox {
-    width: 50px;
+    width: fit-content;
     background-color: lightgray;
     border-radius: 8px;
     display: flex;
@@ -270,14 +247,14 @@
     cursor: pointer;
 
     .originalEstimate {
-        width: 21px;
+        width: 45px;
         height: auto;
         border-radius: 8px 0px 0px 8px;
         font-size: 12px;
     }
 
     .actualEstimate {
-        width: 25px;
+        width: 45px;
         height: auto;
         border-left: 2px solid #E5E5E5;
         border-radius: 0px 8px 8px 0px;
@@ -287,7 +264,7 @@
     }
 
     .InProgress {
-        width: 25px;
+        width: 45px;
         height: auto;
         border-radius: 0px 8px 8px 0px;
         background-color: blue;
@@ -298,7 +275,7 @@
     }
 
     .Done {
-        width: 25px;
+        width: 45px;
         height: auto;
         border-radius: 0px 8px 8px 0px;
         background-color: green;

@@ -171,12 +171,12 @@ const ResourcesPage = () => {
 
     const getTime = (time) => {
         if (time) {
-            const data = time / 60;
-            if (data >= 60) {
-                const time = data / 60;
-                return time.toString() + "h";
-            } else {
-                return data.toString() + "m";
+            if (Math.floor(time / 3600) && ((time % 3600) / 60) > 0) {
+                return Math.floor(time / 3600).toString() + "h" + " " + ((time % 3600) / 60).toString() + "m";
+            } else if (Math.floor(time / 3600)) {
+                return Math.floor(time / 3600).toString() + "h";
+            } else if ((time % 3600) / 60) {
+                return ((time % 3600) / 60).toString() + "m";
             }
         } else {
             return null;
