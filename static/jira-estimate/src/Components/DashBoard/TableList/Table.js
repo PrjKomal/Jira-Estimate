@@ -118,6 +118,16 @@ const Table = (props) => {
     setColumns(columnsFromBackend)
   }, [allIssues])
 
+  const [height, setHeigth] = useState()
+  useEffect(() => {
+    var elem = document.getElementById("tableContainer");
+    if (elem) {
+      var rect = elem.getBoundingClientRect();
+      setHeigth(rect.height)
+    }
+  },[columns, issueId])
+  console.log(height)
+
   const onDragEnd = (result, columns, setColumns) => {
     if (!result.destination) return;
     const { source, destination, draggableId } = result;
@@ -205,8 +215,10 @@ const Table = (props) => {
       return data.toString() + "m"
     }
   }
+
+
   return (
-    <div className={styles.TableContainer}>
+    <div className={styles.TableContainer} id='tableContainer'>
       <DragDropContext
         onDragEnd={result => onDragEnd(result, columns, setColumns)}
       >
@@ -227,7 +239,7 @@ const Table = (props) => {
                         style={{
                           paddingTop: 10,
                           width: 220,
-                          minHeight: 500,
+                          minHeight: height-200,
                           marginLeft: 8
                         }}
                       >
