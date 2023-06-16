@@ -125,7 +125,7 @@ const Table = (props) => {
       var rect = elem.getBoundingClientRect();
       setHeigth(rect.height)
     }
-  },[columns, issueId])
+  }, [columns, issueId])
 
   const onDragEnd = (result, columns, setColumns) => {
     if (!result.destination) return;
@@ -168,21 +168,36 @@ const Table = (props) => {
   const [state, setState] = useState("")
   const [isInputOpen, setIsInputOpen] = useState("");
 
-
-  const handleClick = (e, id,) => {
-    const inputId = id.toString()
+  const [id, setId] = useState("")
+  const handleClick = (e, id) => {
     const parentId = e.target.parentElement.id;
     const ownId = e.target.id;
+    setId(`input-${id}`)
     if (parentId === id) {
       setIsInputOpen(id);
       setState(ownId)
     }
   };
 
+  useEffect(() => {
+    console.log("in use")
+    console.log("id", id)
+    const element = document.getElementById(id)
+    console.log("element", element)
+    if (element) {
+      console.log("in if")
+      element.addEventListener('keypress', e => {
+        console.log("e.key",e.key)
+        if (e.key === "Enter") {
+          handleBlur()
+        }
+      });
+    }
+  }, [id])
+
 
   const handleChange = (e, id) => {
     const inputId = id.toString()
-
     const value = e.target.value;
 
     setValues((prevValues) => ({
@@ -192,9 +207,9 @@ const Table = (props) => {
   };
 
   const handleBlur = async (e, id) => {
+    setIsInputOpen("");
     const time = values[id]
     await invoke('updateIssueTime', { time, id })
-    setIsInputOpen("");
   };
 
   const handleOpenIssue = (e, key, inputId) => {
@@ -207,17 +222,17 @@ const Table = (props) => {
 
   const getTime = (time) => {
     if (time) {
-        if (Math.floor(time / 3600) && ((time % 3600) / 60) > 0) {
-            return Math.floor(time / 3600).toString() + "h" + " " + ((time % 3600) / 60).toString() + "m";
-        } else if (Math.floor(time / 3600)) {
-            return Math.floor(time / 3600).toString() + "h";
-        } else if ((time % 3600) / 60) {
-            return ((time % 3600) / 60).toString() + "m";
-        }
+      if (Math.floor(time / 3600) && ((time % 3600) / 60) > 0) {
+        return Math.floor(time / 3600).toString() + "h" + " " + ((time % 3600) / 60).toString() + "m";
+      } else if (Math.floor(time / 3600)) {
+        return Math.floor(time / 3600).toString() + "h";
+      } else if ((time % 3600) / 60) {
+        return ((time % 3600) / 60).toString() + "m";
+      }
     } else {
-        return null;
+      return null;
     }
-}
+  }
 
 
   return (
@@ -242,7 +257,7 @@ const Table = (props) => {
                         style={{
                           paddingTop: 10,
                           width: 220,
-                          minHeight: height-200,
+                          minHeight: height - 200,
                           marginLeft: 8
                         }}
                       >
