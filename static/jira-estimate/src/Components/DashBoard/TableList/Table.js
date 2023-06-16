@@ -300,6 +300,7 @@ const Table = (props) => {
                                             value={values[item.id.toString()] || ""} // Get the value from the state
                                             onChange={(e) => handleChange(e, item.id)} // Pass the card id to handleChange
                                             onBlur={(e) => handleBlur(e, item.id)} // Pass the card id to handleBlur
+                                            autoFocus
                                           /> :
 
                                           <div id={item.id} className={styles.partitionBox} >
