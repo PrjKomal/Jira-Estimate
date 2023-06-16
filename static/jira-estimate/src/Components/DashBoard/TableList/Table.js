@@ -180,14 +180,9 @@ const Table = (props) => {
   };
 
   useEffect(() => {
-    console.log("in use")
-    console.log("id", id)
     const element = document.getElementById(id)
-    console.log("element", element)
     if (element) {
-      console.log("in if")
       element.addEventListener('keypress', e => {
-        console.log("e.key",e.key)
         if (e.key === "Enter") {
           handleBlur()
         }
