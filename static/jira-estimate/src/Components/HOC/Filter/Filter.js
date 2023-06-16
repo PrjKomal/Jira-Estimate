@@ -122,7 +122,7 @@ const Filter = (props) => {
   return (
     <div className={styles.filterContainer}>
       <div className={styles.filterSelect}>
-        <div className={showItems ? styles.select_box__box_active : styles.select_box__box}>
+        <div className={showItems ? styles.select_box__box_active : styles.select_box__box} onClick={handelDropDown}>
           <div className={styles.select_box__container}>
             <div className={styles.select_box__selected_item} ref={dropDownRef} onClick={handelDropDown}>
               {selectedItem ? selectedItem : "Project"}
@@ -189,7 +189,7 @@ const Filter = (props) => {
 
         </div>
 
-        <div className={showType ? styles.select_box__box_active : styles.select_box__box}>
+        <div className={showType ? styles.select_box__box_active : styles.select_box__box} onClick={handelDropDownType}>
           <div className={styles.select_box__container}>
             <div className={styles.select_box__selected_item} ref={dropDownRefType} onClick={handelDropDownType}>
               Type {selectedType.length > 0 && <div className={styles.count}>{selectedType.length}</div>}
@@ -222,7 +222,7 @@ const Filter = (props) => {
         </div>
 
         {/* Filter by label */}
-        <div className={showLabel ? styles.select_box__box_active : styles.select_box__box}>
+        <div className={showLabel ? styles.select_box__box_active : styles.select_box__box} onClick={handelDropDownLabel}>
           <div className={styles.select_box__container}>
             <div className={styles.select_box__selected_item} ref={dropDownRefLabel} onClick={handelDropDownLabel}>
               Label {selectedLabel.length > 0 && <div className={styles.count}>{selectedLabel.length}</div>}
